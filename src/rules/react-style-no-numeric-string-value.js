@@ -1,3 +1,4 @@
+/* @flow */
 // Rule to enforce https://github.com/facebook/react/issues/1357
 const CSSProperty = {
   isInList: {
@@ -180,7 +181,7 @@ const CSSProperty = {
     wordBreak: true,
     wordSpacing: true,
     wordWrap: true,
-    zIndex: true
+    zIndex: true,
   },
 
   // Note: copied from react/CSSProperty
@@ -222,56 +223,81 @@ const CSSProperty = {
     strokeOpacity: true,
     strokeWidth: true,
   },
-}
+};
 
-function errorMessage({property, rawValue, fixedRawValue}) {
+function errorMessage({ property, rawValue, fixedRawValue }) {
+  /* eslint-disable max-len */
   return `use ${fixedRawValue} (not ${rawValue}). '${property}' value = ${rawValue} is numeric string value which react(v15) will treat as a unitless number.`;
+  /* eslint-enable max-len */
 }
 
 function toRaw(value) {
-  if (typeof value === 'number') { return `${value}`; }
-  if (typeof value === 'string') { return `'${value}'`; }
+  if (typeof value === 'number') {
+    return `${value}`;
+  }
+  if (typeof value === 'string') {
+    return `'${value}'`;
+  }
   return value;
 }
 
-
-module.exports = (context) => {
-  //--------------------------------------------------------------------------
-  // Public
-  //--------------------------------------------------------------------------
-  return {
-    Property(node) {
-      if (node.value.type !== 'Literal') { return; }
-      const name = node.key.name;
-      const value = node.value.value;
-
-      if (!CSSProperty.isInList[name] || CSSProperty.isUnitlessNumber[name]) { return; }
-
-      const isEmpty = value == null || typeof value === 'boolean' || value === '';
-      if (isEmpty) { return; }
-
-      const isNonNumeric = isNaN(value);
-      if (isNonNumeric || value === 0) { return; }
-
-      if (typeof value !== 'string') { return; }
-
-      const numericValue = parseInt(value);
-      let fixedRawValue = toRaw(numericValue === 0 ? 0 : `${numericValue}px`);
-
-      // numeric string value
-      context.report({
-        message: errorMessage({property: name, rawValue: node.value.raw, fixedRawValue }),
-        node: node.value,
-        fix(fixer) {
-          return fixer.replaceText(node.value, fixedRawValue);
-        },
-      });
+module.exports = {
+  meta: {
+    docs: {
+      description: 'Rule to enforce https://github.com/facebook/react/issues/1357',
     },
-  };
-};
+    fixable: 'code',
+  },
 
-module.exports.meta = {
-  fixable: "code",
+  create(context) {
+    return {
+      Property(node) {
+        if (node.value.type !== 'Literal') {
+          return;
+        }
+        const name = node.key.name;
+        const value = node.value.value;
+
+        if (!CSSProperty.isInList[name] || CSSProperty.isUnitlessNumber[name]) {
+          return;
+        }
+
+        const isEmpty =
+          value == null || typeof value === 'boolean' || value === '';
+
+        if (isEmpty) {
+          return;
+        }
+
+        const isNonNumeric = isNaN(value);
+        if (isNonNumeric || value === 0) {
+          return;
+        }
+
+        if (typeof value !== 'string') {
+          return;
+        }
+
+        const numericValue = parseInt(value, 10);
+        const fixedRawValue = toRaw(
+          numericValue === 0 ? 0 : `${numericValue}px`,
+        );
+
+        // numeric string value
+        context.report({
+          message: errorMessage({
+            property: name,
+            rawValue: node.value.raw,
+            fixedRawValue,
+          }),
+          node: node.value,
+          fix(fixer) {
+            return fixer.replaceText(node.value, fixedRawValue);
+          },
+        });
+      },
+    };
+  },
 };
 
 module.exports.errorMessage = errorMessage;

@@ -1,30 +1,16 @@
-/**
- * @fileoverview find keys in locale files which are not in code
- * @author Mayank Agarwal
- */
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
+/* @flow */
 import rule from '../relay-no-missing-variable-in-props';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: 'babel-eslint',
 });
 
-const error = (missingVariables, others = {}) => {
-  return {
-    message: `Missing relay variables in props [${missingVariables}]`,
-    ...others,
-  };
-};
+const error = (missingVariables, others = {}) => ({
+  message: `Missing relay variables in props [${missingVariables}]`,
+  ...others,
+});
 
 ruleTester.run('relay-no-missing-variable-in-props', rule, {
   valid: [
@@ -139,8 +125,8 @@ ruleTester.run('relay-no-missing-variable-in-props', rule, {
             \`,
           },
         });
-      `
-    }
+      `,
+    },
   ],
 
   invalid: [
@@ -176,9 +162,7 @@ ruleTester.run('relay-no-missing-variable-in-props', rule, {
         });
       `,
 
-      errors: [
-        error(['variable1'], { line: 5, column: 10 }),
-      ],
+      errors: [error(['variable1'], { line: 5, column: 10 })],
     },
 
     {
@@ -216,8 +200,8 @@ ruleTester.run('relay-no-missing-variable-in-props', rule, {
       `,
 
       errors: [
-        error(['variable1'], {line: 3, column: 22}),
-        error(['variable2'], {line: 7, column: 23}),
+        error(['variable1'], { line: 3, column: 22 }),
+        error(['variable2'], { line: 7, column: 23 }),
       ],
     },
 
@@ -238,9 +222,7 @@ ruleTester.run('relay-no-missing-variable-in-props', rule, {
         });
       `,
 
-      errors: [
-        error(['variable1'], {line: 1, column: 28}),
-      ],
+      errors: [error(['variable1'], { line: 1, column: 28 })],
     },
   ],
 });

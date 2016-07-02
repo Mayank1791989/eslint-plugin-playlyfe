@@ -3,3 +3,4 @@ lib/
 .nyc_output
 coverage
 coverage.lcov
+npm-debug.log

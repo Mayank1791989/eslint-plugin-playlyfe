@@ -1,3 +1,4 @@
+/* @flow */
 module.exports = {
   rules: {
     'react-intl-no-undef-id': require('./rules/react-intl-no-undef-id'),

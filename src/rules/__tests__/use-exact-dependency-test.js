@@ -1,21 +1,11 @@
-/**
- * @fileoverview find keys in locale files which are not in code
- * @author Mayank Agarwal
- */
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
+/* @flow */
 import rule from '../use-exact-dependency';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
 
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
-
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: 'babel-eslint',
+});
 
 const baseConfig = {
   parser: 'babel-eslint',
@@ -48,7 +38,7 @@ ruleTester.run('use-exact-dependency', rule, {
       `,
       ...baseConfig,
       filename: 'some.json',
-    }
+    },
   ],
 
   invalid: [
@@ -62,17 +52,20 @@ ruleTester.run('use-exact-dependency', rule, {
           }
         };
       `,
-      errors: [{
-        message: 'use-exact-dependency',
-        type: 'Literal',
-        line: 3,
-        column: 20,
-      }, {
-        message: 'use-exact-dependency',
-        type: 'Literal',
-        line: 4,
-        column: 20,
-      }],
+      errors: [
+        {
+          message: 'use-exact-dependency',
+          type: 'Literal',
+          line: 3,
+          column: 20,
+        },
+        {
+          message: 'use-exact-dependency',
+          type: 'Literal',
+          line: 4,
+          column: 20,
+        },
+      ],
       ...baseConfig,
     },
   ],

@@ -1,13 +1,7 @@
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+/* @flow */
 import rule from '../react-intl-no-untranslated-string';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: 'babel-eslint',
@@ -40,46 +34,41 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
     // attributes tests
     {
       code: '<div title="string" />',
-      errors: [
-        error({line: 1, column: 12}),
-      ],
+      errors: [error({ line: 1, column: 12 })],
     },
 
     {
       code: '<div title={"string"} />',
-      errors: [
-        error({line: 1, column: 13}),
-      ],
+      errors: [error({ line: 1, column: 13 })],
+      parser: 'babel-eslint',
+    },
+
+    {
+      // don't crash for non-string attributes
+      code: '<div title={false} />',
+      errors: [error({ line: 1, column: 13 })],
       parser: 'babel-eslint',
     },
 
     {
       code: '<div title={`string ${h} hello`} />',
-      errors: [
-        error({line: 1, column: 13}),
-      ],
+      errors: [error({ line: 1, column: 13 })],
     },
 
     // children
     {
       code: '<div>String</div>',
-      errors: [
-        error({line: 1, column: 6}),
-      ],
+      errors: [error({ line: 1, column: 6 })],
     },
 
     {
       code: '<div> { "String" } </div>',
-      errors: [
-        error({line: 1, column: 9}),
-      ],
+      errors: [error({ line: 1, column: 9 })],
     },
 
     {
       code: '<div>  { `String hello ${a} test` } </div>',
-      errors: [
-        error({line: 1, column: 10}),
-      ],
+      errors: [error({ line: 1, column: 10 })],
     },
 
     // report correct position if whitespace in string starting
@@ -89,9 +78,7 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
           String
         </div>
       `,
-      errors: [
-        error({line: 2, column: 3}),
-      ],
+      errors: [error({ line: 2, column: 3 })],
     },
 
     {
@@ -101,9 +88,7 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
           String
         </div>
       `,
-      errors: [
-        error({line: 3, column: 3}),
-      ],
+      errors: [error({ line: 3, column: 3 })],
     },
 
     {
@@ -113,9 +98,7 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
         >    String
         </div>
       `,
-      errors: [
-        error({line: 3, column: 6}),
-      ],
+      errors: [error({ line: 3, column: 6 })],
     },
 
     {
@@ -124,11 +107,7 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
           ####ReportCorrectlyIfSpecialCharacters
         </div>
       `,
-      errors: [
-        error({line: 2, column: 3})
-      ]
-    }
-
-
+      errors: [error({ line: 2, column: 3 })],
+    },
   ],
 });

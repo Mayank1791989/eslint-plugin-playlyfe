@@ -1,10 +1,11 @@
+/* @flow */
 module.exports = {
-  preprocess(text) {
+  preprocess(text: string) {
     const json = `const json = ${text};\n`;
     return [json];
   },
 
-  postprocess(messages) {
+  postprocess(messages: Array<any>) {
     const ignoreRuleIDs = {
       quotes: true,
       'comma-dangle': true,
@@ -12,9 +13,7 @@ module.exports = {
       'no-unused-vars': true,
     };
     const errors = messages[0];
-    const validErrors = errors.filter((error) => {
-      return !ignoreRuleIDs[error.ruleId];
-    });
+    const validErrors = errors.filter(error => !ignoreRuleIDs[error.ruleId]);
     return validErrors;
   },
 };

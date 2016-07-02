@@ -1,28 +1,18 @@
-/**
- * @fileoverview find keys in locale files which are not in code
- * @author Mayank Agarwal
- */
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
+/* @flow */
 import rule from '../react-intl-no-missing-id';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: 'babel-eslint',
 });
 
 const defaultParams = {
-  options: [{
-    reactIntlFilePath: require.resolve('./data/react-intl.json'),
-  }],
+  options: [
+    {
+      reactIntlFilePath: require.resolve('./data/react-intl.json'),
+    },
+  ],
   filename: 'i18n/en.js',
 };
 
@@ -48,7 +38,7 @@ ruleTester.run('react-intl-no-missing-id', rule, {
         }
       `,
       filename: 'randomJSFile.js',
-    }
+    },
   ],
 
   invalid: [
@@ -71,11 +61,13 @@ ruleTester.run('react-intl-no-missing-id', rule, {
         }
       `,
 
-      errors: [{
-        message: '3 ids missing',
-        line: 1,
-        column: 16,
-      }],
+      errors: [
+        {
+          message: '3 ids missing',
+          line: 1,
+          column: 16,
+        },
+      ],
 
       ...defaultParams,
     },
@@ -91,13 +83,14 @@ ruleTester.run('react-intl-no-missing-id', rule, {
         }
       `,
       ...defaultParams,
-      errors: [{
-        message: 'Unsupported keyType',
-        line: 6,
-        column: 4,
-      }],
+      errors: [
+        {
+          message: 'Unsupported keyType',
+          line: 6,
+          column: 4,
+        },
+      ],
     },
-
 
     // error if react intl file path missing
     {
@@ -106,9 +99,11 @@ ruleTester.run('react-intl-no-missing-id', rule, {
           'some.random.id': 'some default message',
         }
       `,
-      errors: [{
-        message: 'Missing reactIntlFilePath option.',
-      }],
+      errors: [
+        {
+          message: 'Missing reactIntlFilePath option.',
+        },
+      ],
       parser: 'babel-eslint',
     },
 
@@ -119,13 +114,18 @@ ruleTester.run('react-intl-no-missing-id', rule, {
           'some.random.id': 'some default message',
         }
       `,
-      errors: [{
-        line: 1, column: 1,
-      }],
+      errors: [
+        {
+          line: 1,
+          column: 1,
+        },
+      ],
       parser: 'babel-eslint',
-      options: [{
-        reactIntlFilePath: 'some_missing_file_path.json',
-      }]
-    }
+      options: [
+        {
+          reactIntlFilePath: 'some_missing_file_path.json',
+        },
+      ],
+    },
   ],
 });

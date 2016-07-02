@@ -1,13 +1,7 @@
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
+/* @flow */
 import rule, { errorMessage } from '../react-style-no-numeric-string-value';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
   parser: 'babel-eslint',
@@ -26,7 +20,7 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
         const someObject = {
           test: '10',
         };
-      `
+      `,
     },
 
     {
@@ -35,7 +29,7 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
         const someObject = {
           width: '10px',
         };
-      `
+      `,
     },
 
     {
@@ -44,9 +38,8 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
         const someObject = {
           width: 10,
         };
-      `
+      `,
     },
-
 
     {
       // dont report errors for css property which supports unitless number
@@ -54,8 +47,8 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
         const someObject = {
           lineHeight: '10',
         };
-      `
-    }
+      `,
+    },
   ],
 
   invalid: [
@@ -70,11 +63,17 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
           width: '10px',
         };
       `,
-      errors: [{
-        message: errorMessage({ property: 'width', rawValue: "'10'", fixedRawValue: "'10px'" }),
-        line: 3,
-        column: 18,
-      }],
+      errors: [
+        {
+          message: errorMessage({
+            property: 'width',
+            rawValue: "'10'",
+            fixedRawValue: "'10px'",
+          }),
+          line: 3,
+          column: 18,
+        },
+      ],
     },
 
     {
@@ -89,11 +88,17 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
           width: 0,
         };
       `,
-      errors: [{
-        message: errorMessage({ property: 'width', rawValue: "'0'", fixedRawValue: '0' }),
-        line: 3,
-        column: 18,
-      }],
+      errors: [
+        {
+          message: errorMessage({
+            property: 'width',
+            rawValue: "'0'",
+            fixedRawValue: '0',
+          }),
+          line: 3,
+          column: 18,
+        },
+      ],
     },
 
     {
@@ -107,11 +112,17 @@ ruleTester.run('react-style-no-numeric-string-value', rule, {
           <StyleProvider style={{ width: '100%', height: '250px' }} />
         );
       `,
-      errors: [{
-        message: errorMessage({ property: 'height', rawValue: "'250'", fixedRawValue: "'250px'" }),
-        line: 3,
-        column: 58,
-      }],
-    }
+      errors: [
+        {
+          message: errorMessage({
+            property: 'height',
+            rawValue: "'250'",
+            fixedRawValue: "'250px'",
+          }),
+          line: 3,
+          column: 58,
+        },
+      ],
+    },
   ],
 });

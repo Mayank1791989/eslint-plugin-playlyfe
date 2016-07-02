@@ -36,7 +36,9 @@ module.exports = Components.detect((context, components, utils) => {
   // relay createContainer callExpression node
   // createContainer(component, spec);
   function getComponentWiseVariablesMapping(relayCreateContainerNode) {
-    if (relayCreateContainerNode.type !== 'CallExpression') { throw new Error('node should be of type CallExpression'); }
+    if (relayCreateContainerNode.type !== 'CallExpression') {
+      throw new Error('node should be of type CallExpression');
+    }
 
     const traverser = new Traverser();
     const variablesMapping = {};
@@ -52,7 +54,8 @@ module.exports = Components.detect((context, components, utils) => {
           if (expression.arguments.length !== 2) { return; }
 
           // jsxElementName.getFragment('xyz', { var1, var2, var3 })
-          const jsxElementName = sourceCode.getText(expression.callee.object); // return jsxElementName
+          // return jsxElementName
+          const jsxElementName = sourceCode.getText(expression.callee.object);
           const variables = expression.arguments[1].properties.map((p) => p.key.name);
           variablesMapping[jsxElementName] = variables; // eslint-disable-line no-param-reassign
         });
@@ -65,7 +68,9 @@ module.exports = Components.detect((context, components, utils) => {
   // node @TODO extends above React Component.detect util
   // to add relay related methods
   function isRelayCreateContainer(node) {
-    if (node.type !== 'CallExpression') { console.error('node should be of type CallExpression'); }
+    if (node.type !== 'CallExpression') {
+      console.error('node should be of type CallExpression');
+    }
     const name = sourceCode.getText(node.callee);
     return name === 'Relay.createContainer' || name === 'createRelayContainer';
   }
@@ -116,24 +121,25 @@ module.exports = Components.detect((context, components, utils) => {
     'Program:exit'() {
       const list = components.list();
 
-      if (Object.keys(relayComponentsVariablesMapping).length === 0) { // no relay createContainer present in file
+      if (Object.keys(relayComponentsVariablesMapping).length === 0) {
+        // no relay createContainer present in file
         return;
       }
 
-      for (const component in list) {
-        if (!list.hasOwnProperty(component)) { continue; }
-
-        const jsxElements = list[component].jsxElements || [];
-        const componentName = getComponentName(list[component].node);
+      Object.keys(list).forEach((key) => {
+        const component = list[key];
+        const jsxElements = component.jsxElements || [];
+        const componentName = getComponentName(component.node);
         const variablesMapping = relayComponentsVariablesMapping[componentName];
-        if (!variablesMapping) { continue; }
+        if (!variablesMapping) { return; }
 
-        jsxElements.forEach(({name, node}) => {
+        jsxElements.forEach(({ name, node }) => {
           const variables = variablesMapping[name];
           if (!variables) { return; }
           // jsx elements map
           const attrsMap = node.attributes.reduce((acc, attr) => {
-            if (attr.type !== 'JSXAttribute') { return acc; } // ignore other like JSXSpreadAttribute
+            // ignore other like JSXSpreadAttribute
+            if (attr.type !== 'JSXAttribute') { return acc; }
             acc[attr.name.name] = true; // eslint-disable-line no-param-reassign
             return acc;
           }, {});
@@ -146,7 +152,7 @@ module.exports = Components.detect((context, components, utils) => {
             });
           }
         });
-      }
+      });
     },
   };
 });

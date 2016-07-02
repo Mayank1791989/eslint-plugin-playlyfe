@@ -1,19 +1,7 @@
-/**
- * @fileoverview find keys in locale files which are not in code
- * @author Mayank Agarwal
- */
-
-//------------------------------------------------------------------------------
-// Requirements
-//------------------------------------------------------------------------------
-
+/* @flow */
 import rule from '../react-intl-no-empty-translation';
 import dedent from 'dedent-js';
 import RuleTester from '../../utils/RuleTester';
-
-//------------------------------------------------------------------------------
-// Tests
-//------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester();
 
@@ -40,7 +28,7 @@ ruleTester.run('react-intl-no-empty-translation', rule, {
       `,
       ...defaultOptions,
       filename: 'not_intl_file.js',
-    }
+    },
   ],
 
   invalid: [
@@ -50,12 +38,14 @@ ruleTester.run('react-intl-no-empty-translation', rule, {
           'some.id.with.missing.translation': '',
         }
       `,
-      errors: [{
-        message: 'missing translation',
-        type: 'Literal',
-        line: 2,
-        column: 39,
-      }],
+      errors: [
+        {
+          message: 'missing translation',
+          type: 'Literal',
+          line: 2,
+          column: 39,
+        },
+      ],
       ...defaultOptions,
     },
   ],
