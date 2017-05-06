@@ -37,7 +37,7 @@
   "homepage": "https://github.com/Mayank1791989/eslint-plugin-playlyfe#readme",
   "dependencies": {
     "eslint": "3.19.0",
-    "eslint-plugin-react": "6.10.3"
+    "eslint-plugin-react": "7.0.0"
   },
   "peerDependencies": {
     "eslint": "^3.0.0"
