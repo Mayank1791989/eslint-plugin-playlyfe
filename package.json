@@ -37,7 +37,7 @@
   "homepage": "https://github.com/Mayank1791989/eslint-plugin-playlyfe#readme",
   "dependencies": {
     "eslint": "3.19.0",
-    "eslint-plugin-react": "6.10.3"
+    "eslint-plugin-react": "7.0.0"
   },
   "peerDependencies": {
     "eslint": "^3.0.0"
@@ -55,11 +55,11 @@
     "dedent-js": "1.0.1",
     "eslint-config-airbnb-base": "11.1.3",
     "eslint-plugin-import": "2.2.0",
-    "flow-bin": "0.44.2",
-    "flow-typed": "2.1.1",
+    "flow-bin": "0.45.0",
+    "flow-typed": "2.1.2",
     "husky": "0.13.3",
-    "jest-cli": "19.0.2",
-    "semantic-release": "6.3.2"
+    "jest-cli": "20.0.0",
+    "semantic-release": "6.3.6"
   },
   "config": {
     "commitizen": {
