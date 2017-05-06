@@ -58,7 +58,7 @@
     "flow-bin": "0.44.2",
     "flow-typed": "2.1.1",
     "husky": "0.13.3",
-    "jest-cli": "19.0.2",
+    "jest-cli": "20.0.0",
     "semantic-release": "6.3.2"
   },
   "config": {
