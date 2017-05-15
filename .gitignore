@@ -4,3 +4,4 @@ lib/
 coverage
 coverage.lcov
 npm-debug.log
+src/__tests-data__/schema.json
