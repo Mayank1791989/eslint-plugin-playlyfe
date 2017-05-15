@@ -1,20 +1,36 @@
 /* @flow */
-module.exports = {
+import js from './plugins/js';
+import react from './plugins/react';
+import relay from './plugins/relay';
+import reactIntl from './plugins/react-intl';
+import flow from './plugins/flow';
+import testing from './plugins/testing';
+
+import jsonPreprocessor from './processors/json';
+
+const plugin = {
   rules: {
-    'react-intl-no-undef-id': require('./rules/react-intl-no-undef-id'),
-    'react-intl-no-missing-id': require('./rules/react-intl-no-missing-id'),
-    'react-intl-no-empty-translation': require('./rules/react-intl-no-empty-translation'),
-    'react-intl-no-untranslated-string': require('./rules/react-intl-no-untranslated-string'),
-
-    'react-style-no-numeric-string-value': require('./rules/react-style-no-numeric-string-value'),
-
-    'use-exact-dependency': require('./rules/use-exact-dependency'),
-
-    'relay-no-missing-variable-in-props': require('./rules/relay-no-missing-variable-in-props'),
+    ...js.rules,
+    ...flow.rules,
+    ...react.rules,
+    ...reactIntl.rules,
+    ...testing.rules,
+    ...relay.rules,
   },
 
-  // add your processors here
+  // json pre processor
   processors: {
-    '.json': require('./processors/json'),
+    '.json': jsonPreprocessor,
+  },
+
+  configs: {
+    ...js.configs,
+    ...flow.configs,
+    ...react.configs,
+    ...reactIntl.configs,
+    ...relay.configs,
+    ...testing.configs,
   },
 };
+
+module.exports = plugin;
