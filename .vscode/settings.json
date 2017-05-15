@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -8,5 +8,16 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "lib": true
-  }
+  },
+
+  "prettier.eslintIntegration": true,
+  "prettier.bracketSpacing": true,
+  "prettier.semi": true,
+  "prettier.parser": "flow",
+  "prettier.tabWidth": 2,
+  "prettier.singleQuote": true,
+  "prettier.jsxBracketSameLine": false,
+  "prettier.printWidth": 80,
+  "prettier.trailingComma": "all",
+  "prettier.useTabs": false
 }
