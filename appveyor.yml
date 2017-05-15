@@ -1,14 +1,11 @@
 environment:
   matrix:
-    - nodejs_version: '5'
     - nodejs_version: '6'
+    - nodejs_version: '7'
 
 install:
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
-  - npm -g install npm@^3.x
-  - set PATH=%APPDATA%\npm;%PATH%
-  - npm install
 
 matrix:
   fast_finish: true
@@ -23,5 +20,5 @@ clone_depth: 1
 
 test_script:
   - node --version
-  - npm --version
-  - npm test
+  - yarn --version
+  - yarn test
