@@ -241,7 +241,8 @@ function toRaw(value: number | string) {
 module.exports = {
   meta: {
     docs: {
-      description: 'Rule to enforce https://github.com/facebook/react/issues/1357',
+      description:
+        'Rule to enforce https://github.com/facebook/react/issues/1357',
     },
     fixable: 'code',
   },
@@ -254,8 +255,8 @@ module.exports = {
         if (node.value.type !== 'Literal') {
           return;
         }
-        const name = node.key.name;
-        const value = node.value.value;
+        const { name } = node.key;
+        const { value } = node.value;
 
         if (!CSSProperty.isInList[name] || CSSProperty.isUnitlessNumber[name]) {
           return;
@@ -268,6 +269,7 @@ module.exports = {
           return;
         }
 
+        // eslint-disable-next-line no-restricted-globals
         const isNonNumeric = isNaN(value);
         if (isNonNumeric || value === 0) {
           return;

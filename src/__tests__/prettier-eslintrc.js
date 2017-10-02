@@ -5,7 +5,7 @@ module.exports = {
     'plugin:playlyfe/js',
     'plugin:playlyfe/flowtype',
     'plugin:playlyfe/react',
-    'plugin:playlyfe/relay',
-    'plugin:playlyfe/react-intl',
+    // to disable rules for prettier
+    'plugin:playlyfe/prettier',
   ],
 };

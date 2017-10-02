@@ -9,6 +9,8 @@ module.exports = {
 
     'handle-callback-err': ['error', '^.*(e|E)rr'],
 
+    'no-buffer-constructor': 'error',
+
     'no-mixed-requires': 'error',
     'no-new-require': 'error',
     'no-path-concat': 'error',

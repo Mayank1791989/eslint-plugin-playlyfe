@@ -59,7 +59,7 @@ module.exports = {
 
     return {
       ObjectExpression(node) {
-        node.properties.forEach((propertyNode) => {
+        node.properties.forEach(propertyNode => {
           const keyText = getKeyText(propertyNode.key);
           if (keyText) {
             presentIds[keyText] = true;

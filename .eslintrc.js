@@ -11,8 +11,14 @@ module.exports = {
     'eslint-config-airbnb-base/rules/style',
     'eslint-config-airbnb-base/rules/variables',
     'eslint-config-airbnb-base/rules/es6',
+    'eslint-config-prettier',
   ].map(require.resolve),
+
   parser: 'babel-eslint',
+
+  plugins: [
+    "prettier",
+  ],
 
   env: {
     jest: true,
@@ -28,5 +34,6 @@ module.exports = {
     'no-param-reassign': [ERROR, { 'props': false }],
     'no-underscore-dangle': OFF,
     'global-require': OFF,
+    'prettier/prettier': ERROR,
   },
 };

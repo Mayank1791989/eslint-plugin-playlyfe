@@ -3,19 +3,21 @@ import js from './plugins/js';
 import react from './plugins/react';
 import relay from './plugins/relay';
 import reactIntl from './plugins/react-intl';
-import flow from './plugins/flow';
+import flowtype from './plugins/flowtype';
 import testing from './plugins/testing';
+import prettier from './plugins/prettier';
 
 import jsonPreprocessor from './processors/json';
 
 const plugin = {
   rules: {
     ...js.rules,
-    ...flow.rules,
+    ...flowtype.rules,
     ...react.rules,
     ...reactIntl.rules,
-    ...testing.rules,
     ...relay.rules,
+    ...testing.rules,
+    ...prettier.rules,
   },
 
   // json pre processor
@@ -25,11 +27,12 @@ const plugin = {
 
   configs: {
     ...js.configs,
-    ...flow.configs,
+    ...flowtype.configs,
     ...react.configs,
     ...reactIntl.configs,
     ...relay.configs,
     ...testing.configs,
+    ...prettier.configs,
   },
 };
 

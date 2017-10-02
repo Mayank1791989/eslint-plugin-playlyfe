@@ -6,5 +6,11 @@ test('all rules used', () => {
   const ruleFinder = createRuleFinder(
     path.resolve(__dirname, './all-rules-used-eslintrc.js'),
   );
-  expect(ruleFinder.getUnusedRules()).toEqual([]);
+  const ignoreRuleList = ['playlyfe/prettier'];
+
+  const unusedRules = ruleFinder
+    .getUnusedRules()
+    .filter(rule => !ignoreRuleList.includes(rule));
+
+  expect(unusedRules).toEqual([]);
 });

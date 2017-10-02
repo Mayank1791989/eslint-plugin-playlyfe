@@ -1,7 +1,11 @@
 module.exports = {
-  plugin: ['playlyfe'],
+  plugins: ['playlyfe'],
 
   rules: {
+    'for-direction': 'error',
+
+    'getter-return': ['error', { allowImplicit: true }],
+
     'no-await-in-loop': 'error',
     'playlyfe/babel-no-await-in-loop': 'off',
 

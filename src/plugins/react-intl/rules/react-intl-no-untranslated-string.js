@@ -35,7 +35,7 @@ module.exports = {
       return { line, column };
     }
 
-    const report = (node) => {
+    const report = node => {
       context.report({
         loc: findCorrectLocation(node),
         message: 'no-untranslated-string',
@@ -47,9 +47,9 @@ module.exports = {
       // <div> <i /> </div>
       // div has 3 children
       // ' ', <i />, ' '   1 & 2  are literal with value whitespace
-       !/^\s+$/.test(node.value);
+      !/^\s+$/.test(node.value);
 
-    const reportIfString = (node) => {
+    const reportIfString = node => {
       if (node.type === 'Literal' && isNotWhiteSpaceLiteral(node)) {
         report(node);
       }
@@ -66,13 +66,13 @@ module.exports = {
     return {
       JSXElement(node) {
         const childrenNodes = node.children;
-        childrenNodes.forEach((childNode) => {
+        childrenNodes.forEach(childNode => {
           reportIfString(childNode);
         });
       },
 
       JSXAttribute(node) {
-        const name = node.name.name;
+        const { name } = node.name;
         if (!ATTRS_TO_CHECK[name]) {
           return;
         }
