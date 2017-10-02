@@ -11,7 +11,7 @@ module.exports = {
 
     return {
       Property(node) {
-        const value = node.value.value;
+        const { value } = node.value;
         if (!value.trim()) {
           context.report({
             node: node.value,

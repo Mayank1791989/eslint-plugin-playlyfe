@@ -1,5 +1,5 @@
 /* @flow */
 module.exports = {
+  extends: 'plugin:playlyfe/js',
   plugins: ['playlyfe'],
-  extends: ['plugin:playlyfe/js'],
 };

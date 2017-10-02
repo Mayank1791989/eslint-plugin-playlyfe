@@ -19,5 +19,7 @@
   "prettier.jsxBracketSameLine": false,
   "prettier.printWidth": 80,
   "prettier.trailingComma": "all",
-  "prettier.useTabs": false
+  "prettier.useTabs": false,
+
+  "flow.useNPMPackagedFlow": true
 }

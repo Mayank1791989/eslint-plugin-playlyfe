@@ -1,5 +1,6 @@
 /* @flow */
 import { ConfigTester } from './test-utils';
+import dedent from 'dedent-js';
 import path from 'path';
 
 const configTester = new ConfigTester({
@@ -7,6 +8,31 @@ const configTester = new ConfigTester({
 });
 
 // possible-errors
+configTester.run('for-direction', 'error');
+
+configTester.run('getter-return', 'error', {
+  valid: [
+    {
+      code: `
+        class Test {
+          get name(){
+              return "nicholas";
+          }
+        }
+      `,
+    },
+    {
+      code: `
+        class Test {
+          get name(){
+              return;
+          }
+        }
+      `,
+    },
+  ],
+});
+
 configTester.run('no-await-in-loop', 'error');
 configTester.run('playlyfe/babel-no-await-in-loop', 'off');
 
@@ -14,7 +40,10 @@ configTester.run('no-compare-neg-zero', 'error');
 
 configTester.run('no-cond-assign', 'error', {
   valid: [{ code: 'if (a === test) {}' }],
-  invalid: [{ code: 'if (a = test) {}' }, { code: 'if ((a = test) !== null) {}' }],
+  invalid: [
+    { code: 'if (a = test) {}' },
+    { code: 'if ((a = test) !== null) {}' },
+  ],
 });
 
 configTester.run('no-console', 'warn', {
@@ -82,36 +111,32 @@ configTester.run('no-extra-boolean-cast', 'error', {
   invalid: [{ code: ' if (!!test) {} ' }],
 });
 
-configTester.run(
-  'no-extra-parens',
-  'off',
-  {
-    // valid: [
-    //   { code: `a = (b * c) + 10;`},
-    //   { code: `(0).toString(32);`},
-    //   {
-    //     code: `
-    //       const test = (
-    //         <div
-    //           className="test"
-    //           onClick={onClick}
-    //         />
-    //       );
-    //     `,
-    //   },
-    //   {
-    //     code: `
-    //     `,
-    //   }
-    // ],
-    // invalid: [
-    //   { code: `a = (b * c);` },
-    //   { code: `function test() { return (a = 5); }` },
-    //   { code: `const test = (function() {})`},
-    //   { code: `const test = (() => {})`},
-    // ],
-  },
-);
+configTester.run('no-extra-parens', 'off', {
+  // valid: [
+  //   { code: `a = (b * c) + 10;`},
+  //   { code: `(0).toString(32);`},
+  //   {
+  //     code: `
+  //       const test = (
+  //         <div
+  //           className="test"
+  //           onClick={onClick}
+  //         />
+  //       );
+  //     `,
+  //   },
+  //   {
+  //     code: `
+  //     `,
+  //   }
+  // ],
+  // invalid: [
+  //   { code: `a = (b * c);` },
+  //   { code: `function test() { return (a = 5); }` },
+  //   { code: `const test = (function() {})`},
+  //   { code: `const test = (() => {})`},
+  // ],
+});
 
 configTester.run('no-extra-semi', 'error', {
   valid: [{ code: 'function test() { }' }],
@@ -500,6 +525,8 @@ configTester.run('handle-callback-err', 'error', {
   ],
 });
 
+configTester.run('no-buffer-constructor', 'error');
+
 configTester.run('no-mixed-requires', 'error');
 configTester.run('no-new-require', 'error');
 configTester.run('no-path-concat', 'error');
@@ -514,10 +541,50 @@ configTester.run('no-restricted-modules', 'error', {
 configTester.run('no-sync', 'warn');
 
 // styles
+configTester.run('array-bracket-newline', 'error', {
+  valid: [
+    {
+      code: `
+        var e = [
+          () => { console.log('test1'); },
+          () => { console.log('test2'); },
+        ];
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        var e = [
+          () => { dosomething(); },
+          () => { console.log('test2'); } ];
+      `,
+    },
+  ],
+});
+
 configTester.run('playlyfe/babel-array-bracket-spacing', 'off');
 configTester.run('array-bracket-spacing', 'error', {
   valid: [{ code: 'const arr = [1, 2, 3];' }],
   invalid: [{ code: 'const arr = [ 1, 2, 3 ];' }],
+});
+
+configTester.run('array-element-newline', 'off', {
+  valid: [
+    {
+      code: 'const arr = [1, 2, 3];',
+    },
+    {
+      // this is not valid so disabling rule
+      code: `
+        const arr = [
+          1,
+          2,
+          3,
+        ];
+      `,
+    },
+  ],
 });
 
 configTester.run('block-spacing', 'error', {
@@ -754,15 +821,53 @@ configTester.run('func-style', 'error', {
   invalid: [{ code: 'const test = function () { }; ' }],
 });
 
+configTester.run('function-paren-newline', 'error', {
+  valid: [
+    {
+      code: `
+        function test(arg1, arg2, arg3, arg4) {
+          console.log('test');
+        }
+      `,
+    },
+    {
+      code: `
+        function test(
+          arg1,
+          arg2,
+          arg3,
+          arg4,
+        ) {
+          console.log('test');
+        }
+      `,
+    },
+  ],
+
+  invalid: [
+    {
+      code: `
+        function test(arg1, arg2,
+          arg3,
+          arg4,
+        ) {
+          console.log('test');
+        }
+      `,
+    },
+  ],
+});
+
 configTester.run('id-blacklist', 'off');
 configTester.run('id-length', 'off');
 configTester.run('id-match', 'off');
+configTester.run('implicit-arrow-linebreak', 'error');
 
 configTester.run('indent', 'error', {
   valid: [
     // switch case
     {
-      code: `
+      code: dedent(`
         switch(test) {
           case 'test':
             console.log('test');
@@ -770,18 +875,18 @@ configTester.run('indent', 'error', {
           default:
             console.log('default');
         }
-      `,
+      `),
     },
-    {
-      code: `
-        function test(
-          x: string,
-          y: number,
-        ) {
-          console.log(x, y);
-        }
-      `,
-    },
+    // {
+    //   code: `
+    //     function test(
+    //       x: string,
+    //       y: number,
+    //     ) {
+    //       console.log(x, y);
+    //     }
+    //   `,
+    // },
   ],
   invalid: [
     // switch case
@@ -798,7 +903,10 @@ configTester.run('indent', 'error', {
 
 configTester.run('key-spacing', 'error', {
   valid: [{ code: 'const test = { a: 5 };' }],
-  invalid: [{ code: 'const test = { a : 5 };' }, { code: 'const test = { a :5 };' }],
+  invalid: [
+    { code: 'const test = { a : 5 };' },
+    { code: 'const test = { a :5 };' },
+  ],
 });
 
 configTester.run('keyword-spacing', 'error');
@@ -807,6 +915,59 @@ configTester.run('line-comment-position', 'off');
 configTester.run('linebreak-style', 'error');
 
 configTester.run('lines-around-comment', 'off');
+
+configTester.run('lines-between-class-members', 'error', {
+  valid: [
+    {
+      code: `
+        class Test {
+          props: Props;
+          state: State;
+        }
+      `,
+    },
+    {
+      code: `
+        class Test {
+          props: Props;
+
+          state: State;
+        }
+      `,
+    },
+    {
+      code: `
+        class Test {
+          props: Props;
+
+          handle = () => {
+              console.log('handle');
+          };
+
+          test = () => {
+              console.log('handle');
+          };
+        }
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        class Test {
+
+          handle = () => {
+              console.log('handle');
+          };
+          test = () => {
+              console.log('handle');
+          };
+        }
+      `,
+    },
+  ],
+});
+
 configTester.run('lines-around-directive', 'error');
 configTester.run('max-depth', 'error');
 configTester.run('max-len', 'error');
@@ -833,6 +994,8 @@ configTester.run('max-statements-per-line', 'error', {
 
 configTester.run('max-statements', 'off');
 configTester.run('multiline-ternary', 'off');
+
+configTester.run('multiline-comment-style', 'off');
 
 configTester.run('new-cap', 'off'); // cause issues with decorators
 configTester.run('playlyfe/babel-new-cap', 'off');
@@ -982,6 +1145,7 @@ configTester.run('operator-linebreak', 'error', {
 });
 
 configTester.run('padded-blocks', 'error');
+configTester.run('padding-line-between-statements', 'off');
 configTester.run('quote-props', 'error');
 configTester.run('quotes', 'error');
 configTester.run('require-jsdoc', 'off');
@@ -1019,12 +1183,34 @@ configTester.run('playlyfe/babel-semi', 'error', {
   ],
 });
 
+configTester.run('semi-style', 'error', {
+  valid: [
+    {
+      code: `
+        const a = 5;
+        const b = 6;
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        const a = 5
+        ; const b = 6
+      `,
+    },
+  ],
+});
+
 configTester.run('sort-keys', 'off');
 configTester.run('sort-vars', 'off');
 configTester.run('space-before-blocks', 'error');
 
 configTester.run('space-before-function-paren', 'error', {
-  invalid: [{ code: 'const test = function() { }' }, { code: 'function test () { }' }],
+  invalid: [
+    { code: 'const test = function() { }' },
+    { code: 'function test () { }' },
+  ],
 });
 
 configTester.run('space-in-parens', 'error', {
@@ -1039,10 +1225,36 @@ configTester.run('space-infix-ops', 'error', {
 
 configTester.run('space-unary-ops', 'error', {
   valid: [{ code: 'const test = !test2;' }, { code: 'delete test[test2];' }],
-  invalid: [{ code: 'const test = ! test2;' }, { code: 'delete(test[test2]);' }],
+  invalid: [
+    { code: 'const test = ! test2;' },
+    { code: 'delete(test[test2]);' },
+  ],
 });
 
 configTester.run('spaced-comment', 'error');
+
+configTester.run('switch-colon-spacing', 'error', {
+  valid: [
+    {
+      code: `
+        switch (a) {
+          case 0: break;
+          default: foo();
+        }
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        switch (a) {
+          case 0 :break;
+          default :foo();
+        }
+      `,
+    },
+  ],
+});
 
 configTester.run('template-tag-spacing', 'error', {
   valid: [

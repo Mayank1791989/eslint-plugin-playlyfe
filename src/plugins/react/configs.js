@@ -14,6 +14,17 @@ export default {
     rules: {
       'jsx-quotes': ['error', 'prefer-double'],
 
+      'playlyfe/react-boolean-prop-naming': 'off',
+
+      'playlyfe/react-button-has-type': 'error',
+
+      'playlyfe/react-default-props-match-prop-types': [
+        'error',
+        { allowRequiredDefaults: false },
+      ],
+
+      'playlyfe/react-destructuring-assignment': ['error', 'always'],
+
       'playlyfe/react-display-name': ['error', { ignoreTranspilerName: false }],
 
       'playlyfe/react-forbid-component-props': 'off',
@@ -47,10 +58,14 @@ export default {
       // Prevent multiple component definition per file
       'playlyfe/react-no-multi-comp': ['off', { ignoreStateless: true }],
 
+      'playlyfe/react-no-redundant-should-component-update': 'error',
+
       'playlyfe/react-no-render-return-value': 'error',
 
       // @TODO: enable
       'playlyfe/react-no-set-state': 'off',
+
+      'playlyfe/react-no-typos': 'error',
 
       'playlyfe/react-no-string-refs': 'error',
 
@@ -61,6 +76,7 @@ export default {
       // very buggy after destructuring most of cases if report those variables
       // unused
       'playlyfe/react-no-unused-prop-types': 'off',
+      'playlyfe/react-no-unused-state': 'error',
 
       'playlyfe/react-prefer-es6-class': ['error', 'always'],
 
@@ -121,6 +137,8 @@ export default {
 
       'playlyfe/react-jsx-closing-bracket-location': ['error', 'tag-aligned'],
 
+      'playlyfe/react-jsx-closing-tag-location': 'error',
+
       'playlyfe/react-jsx-curly-spacing': [
         'error',
         'never',
@@ -180,6 +198,13 @@ export default {
       // https://github.com/yannickcr/eslint-plugin-playlyfe/react-blob/master/docs/rules/jsx-no-undef.md
       'playlyfe/react-jsx-no-undef': 'error',
 
+      'playlyfe/react-jsx-one-expression-per-line': 'error',
+
+      'playlyfe/react-jsx-curly-brace-presence': [
+        'error',
+        { props: 'never', children: 'never' },
+      ],
+
       // Enforce PascalCase for user-defined JSX components
       // https://github.com/yannickcr/eslint-plugin-playlyfe/react-blob/master/docs/rules/jsx-pascal-case.md
       // enable when supports name starts with underscore
@@ -238,6 +263,9 @@ export default {
 
       'playlyfe/react-forbid-elements': 'off',
       'playlyfe/react-forbid-foreign-prop-types': 'off',
+
+      'playlyfe/react-no-access-state-in-setstate': 'error',
+
       'playlyfe/react-void-dom-elements-no-children': 'error',
 
       'playlyfe/react-style-no-numeric-string-value': 'error',

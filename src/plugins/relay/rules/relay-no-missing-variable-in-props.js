@@ -6,7 +6,8 @@ import invariant from 'invariant';
 module.exports = {
   meta: {
     docs: {
-      description: 'find missing relay variables in props of relay container component',
+      description:
+        'find missing relay variables in props of relay container component',
     },
   },
 
@@ -55,7 +56,7 @@ module.exports = {
             return;
           }
           const relayQLTemplateStringNode = node;
-          relayQLTemplateStringNode.quasi.expressions.forEach((expression) => {
+          relayQLTemplateStringNode.quasi.expressions.forEach(expression => {
             if (expression.type !== 'CallExpression') {
               return;
             } // there can be inline fragments
@@ -67,7 +68,9 @@ module.exports = {
             // jsxElementName.getFragment('xyz', { var1, var2, var3 })
             // return jsxElementName
             const jsxElementName = sourceCode.getText(expression.callee.object);
-            const variables = expression.arguments[1].properties.map(p => p.key.name);
+            const variables = expression.arguments[1].properties.map(
+              p => p.key.name,
+            );
             variablesMapping[jsxElementName] = variables; // eslint-disable-line no-param-reassign
           });
         },
@@ -79,26 +82,32 @@ module.exports = {
     // node @TODO extends above React Component.detect util
     // to add relay related methods
     function isRelayCreateContainer(node) {
-      invariant(node.type === 'CallExpression', 'node should be of type CallExpression');
+      invariant(
+        node.type === 'CallExpression',
+        'node should be of type CallExpression',
+      );
       const name = sourceCode.getText(node.callee);
-      return name === 'Relay.createContainer' || name === 'createRelayContainer';
+      return (
+        name === 'Relay.createContainer' || name === 'createRelayContainer'
+      );
     }
 
-    function getComponentName(node) { // eslint-disable-line consistent-return
+    function getComponentName(node) {
+      // eslint-disable-line consistent-return
       let name = '';
       if (node.id) {
         // component is class component
-        name = node.id.name;
+        ({ name } = node.id);
       } else {
         // pure function or React.createClass
         // const componentName = Component; // variable declaration
-        let parent = node.parent;
+        let { parent } = node;
         while (parent) {
           if (parent.type === 'VariableDeclarator') {
-            name = parent.id.name;
+            ({ name } = parent.id);
             break;
           }
-          parent = parent.parent;
+          ({ parent } = parent);
         }
       }
 
@@ -134,11 +143,12 @@ module.exports = {
           return;
         }
 
-        Object.keys(list).forEach((key) => {
+        Object.keys(list).forEach(key => {
           const component = list[key];
           const jsxElements = component.jsxElements || [];
           const componentName = getComponentName(component.node);
-          const variablesMapping = relayComponentsVariablesMapping[componentName];
+          const variablesMapping =
+            relayComponentsVariablesMapping[componentName];
           if (!variablesMapping) {
             return;
           }
@@ -158,7 +168,9 @@ module.exports = {
               return acc;
             }, {});
 
-            const missingVariableProps = variables.filter(variable => !attrsMap[variable]);
+            const missingVariableProps = variables.filter(
+              variable => !attrsMap[variable],
+            );
             if (!(missingVariableProps && missingVariableProps.length === 0)) {
               context.report({
                 node: node.name,

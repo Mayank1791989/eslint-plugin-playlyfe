@@ -13,9 +13,7 @@ module.exports = {
     'arrow-body-style': [
       'error',
       'as-needed',
-      {
-        requireReturnForObjectLiteral: false,
-      },
+      { requireReturnForObjectLiteral: false },
     ],
 
     // require parens in arrow function arguments
@@ -33,7 +31,10 @@ module.exports = {
     // enforce the spacing around the * in generator functions
     // http://eslint.org/docs/rules/generator-star-spacing
     'generator-star-spacing': ['error', { before: false, after: true }],
-    'playlyfe/babel-generator-star-spacing': ['off', { before: false, after: true }], // deprecated
+    'playlyfe/babel-generator-star-spacing': [
+      'off',
+      { before: false, after: true },
+    ], // deprecated
 
     // disallow modifying variables of class declarations
     // http://eslint.org/docs/rules/no-class-assign

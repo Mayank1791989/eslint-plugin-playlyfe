@@ -3,9 +3,13 @@ module.exports = {
   plugins: ['playlyfe'],
 
   rules: {
+    'array-bracket-newline': ['error', { multiline: true }],
+
     // enforce spacing inside array brackets
     'array-bracket-spacing': ['error', 'never'],
     'playlyfe/babel-array-bracket-spacing': 'off',
+
+    'array-element-newline': ['off'],
 
     // enforce spacing inside single-line blocks
     // http://eslint.org/docs/rules/block-spacing
@@ -64,6 +68,8 @@ module.exports = {
     // TODO: enable
     'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
 
+    'function-paren-newline': ['error', 'multiline'],
+
     // Blacklist certain identifiers to prevent them being used
     // http://eslint.org/docs/rules/id-blacklist
     // can be enabled per project basis
@@ -76,6 +82,8 @@ module.exports = {
 
     // require identifiers to match the provided regular expression
     'id-match': 'off',
+
+    'implicit-arrow-linebreak': ['error', 'below'],
 
     // this option sets a specific tab width for your code
     // http://eslint.org/docs/rules/indent
@@ -145,6 +153,12 @@ module.exports = {
     // TODO: enable ?
     'lines-around-comment': 'off',
 
+    'lines-between-class-members': [
+      'error',
+      'always',
+      { exceptAfterSingleLine: true },
+    ],
+
     // require or disallow newlines around directives
     // http://eslint.org/docs/rules/lines-around-directive
     'lines-around-directive': [
@@ -197,6 +211,8 @@ module.exports = {
 
     // specify the maximum number of statement allowed in a function
     'max-statements': ['off', 10],
+
+    'multiline-comment-style': 'off',
 
     // require multiline ternary
     // http://eslint.org/docs/rules/multiline-ternary
@@ -352,6 +368,9 @@ module.exports = {
     // enforce padding within blocks
     'padded-blocks': ['error', 'never'],
 
+    // TODO: enable?
+    'padding-line-between-statements': 'off',
+
     // require quotes around object literal property names
     // http://eslint.org/docs/rules/quote-props.html
     'quote-props': [
@@ -373,6 +392,8 @@ module.exports = {
 
     // enforce spacing before and after semicolons
     'semi-spacing': ['error', { before: false, after: true }],
+
+    'semi-style': ['error', 'last'],
 
     // requires object keys to be sorted
     'sort-keys': ['off', 'asc', { caseSensitive: false, natural: true }],
@@ -416,6 +437,8 @@ module.exports = {
         markers: ['=', '!'], // space here to support sprockets directives
       },
     ],
+
+    'switch-colon-spacing': ['error', { after: true, before: false }],
 
     'template-tag-spacing': ['error', 'never'],
 

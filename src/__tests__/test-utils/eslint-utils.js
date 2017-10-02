@@ -17,9 +17,6 @@ jest.mock(
   () => require('./eslint-plugin-playlyfe'), // eslint-disable-line global-require
   { virtual: true },
 );
-// preload eslint-plugin-playlyfe (for CLIEngine)
-const EslintPluigns = require('eslint/lib/config/plugins');
-EslintPluigns.define('eslint-plugin-playlyfe', require('./eslint-plugin-playlyfe'));
 
 // NOTE: dont convert this to import form
 const { CLIEngine } = require('eslint');
@@ -35,6 +32,10 @@ export function createLinter(configFile: string) {
     plugins: ['playlyfe'],
   };
   const eslintCLI = new CLIEngine(config);
+  eslintCLI.addPlugin(
+    'eslint-plugin-playlyfe',
+    require('./eslint-plugin-playlyfe'),
+  );
 
   return (code: string, ruleId: string, filename?: string) => {
     const report = eslintCLI.executeOnText(code, filename);
@@ -49,13 +50,11 @@ export function createLinter(configFile: string) {
           (acc, message) => {
             if (message.fatal) {
               // parsing error in test code
-              throw new Error(
-                `
+              throw new Error(`
                 Parse error in test code
                 ${code}
                 ${message.message}
-              `,
-              );
+              `);
             }
             if (message.ruleId === ruleId) {
               acc.messages.push(message);

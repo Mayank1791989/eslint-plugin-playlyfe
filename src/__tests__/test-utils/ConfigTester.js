@@ -66,14 +66,15 @@ export default class ConfigTester {
           const pass = Boolean(lintError);
           return {
             pass,
-            message: pass
-              ? dedent`
+            message: () =>
+              pass
+                ? dedent`
                   Expect linting code:
                     \n${chalk.dim(code)}\n
                   should not report error but reported error:
                     ${lintError}
                 `
-              : dedent`
+                : dedent`
                   Expect linting code:
                     \n${chalk.dim(code)}\n
                   should report error but no error is reported.
@@ -91,7 +92,10 @@ export default class ConfigTester {
         [
           `ruleId '${ruleId}' passed in test not found in config`,
           '\n========= Available ===========\n',
-          `\t${getSuggestionsForMissingRule(ruleId, Object.keys(definedRules)).join('\n\t')}.`,
+          `\t${getSuggestionsForMissingRule(
+            ruleId,
+            Object.keys(definedRules),
+          ).join('\n\t')}.`,
           '\n===============================\n',
         ].join('\n'),
       );

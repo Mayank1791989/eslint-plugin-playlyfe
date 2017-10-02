@@ -11,6 +11,55 @@ configTester.run('jsx-quotes', 'error', {
   invalid: [{ code: "<div name='react' />" }],
 });
 
+configTester.run('playlyfe/react-boolean-prop-naming', 'off');
+configTester.run('playlyfe/react-button-has-type', 'error');
+configTester.run('playlyfe/react-default-props-match-prop-types', 'error', {
+  invalid: [
+    {
+      code: `
+        type Props = {
+          value: string,
+          disabled: boolean,
+        };
+
+        class Test extends React.Component {
+          static props: Props;
+
+          static defaultProps = {
+            disabled: false
+          };
+        }
+      `,
+    },
+  ],
+});
+
+configTester.run('playlyfe/react-destructuring-assignment', 'error', {
+  valid: [
+    {
+      code: `
+        class Test extends React.Component {
+          render() {
+            const { props } = this;
+            return <div className={props.className} />;
+          }
+        }
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        class Test extends React.Component {
+          render() {
+            return <div className={this.props.className} />;
+          }
+        }
+      `,
+    },
+  ],
+});
+
 configTester.run('playlyfe/react-display-name', 'error');
 configTester.run('playlyfe/react-forbid-component-props', 'off');
 
@@ -121,9 +170,14 @@ configTester.run('playlyfe/react-no-direct-mutation-state', 'error', {
 configTester.run('playlyfe/react-no-find-dom-node', 'error');
 configTester.run('playlyfe/react-no-is-mounted', 'error');
 configTester.run('playlyfe/react-no-multi-comp', 'off');
+configTester.run(
+  'playlyfe/react-no-redundant-should-component-update',
+  'error',
+);
 
 configTester.run('playlyfe/react-no-render-return-value', 'error');
 configTester.run('playlyfe/react-no-set-state', 'off');
+configTester.run('playlyfe/react-no-typos', 'error');
 
 configTester.run('playlyfe/react-no-string-refs', 'error');
 configTester.run('playlyfe/react-no-unescaped-entities', 'error');
@@ -139,6 +193,7 @@ configTester.run('playlyfe/react-no-unknown-property', 'error', {
 });
 
 configTester.run('playlyfe/react-no-unused-prop-types', 'off');
+configTester.run('playlyfe/react-no-unused-state', 'error');
 
 configTester.run('playlyfe/react-prefer-es6-class', 'error', {
   invalid: [
@@ -268,6 +323,37 @@ configTester.run('playlyfe/react-jsx-closing-bracket-location', 'error', {
   ],
 });
 
+configTester.run('playlyfe/react-jsx-closing-tag-location', 'error', {
+  valid: [
+    {
+      code: `
+        function test() {
+          return (
+            <div>
+              <h1>Hello</h1>
+              <h1>Test</h1>
+            </div>
+          )
+        }
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        function test() {
+          return (
+            <div>
+              <h1>Hello</h1>
+              <h1>Test</h1>
+              </div>
+          )
+        }
+      `,
+    },
+  ],
+});
+
 configTester.run('playlyfe/react-jsx-curly-spacing', 'error', {
   valid: [
     { code: '<div value={5} />' },
@@ -321,91 +407,83 @@ configTester.run('playlyfe/react-jsx-first-prop-new-line', 'error', {
 
 configTester.run('playlyfe/react-jsx-handler-names', 'off');
 
-configTester.run(
-  'playlyfe/react-jsx-indent',
-  'off',
-  {
-    // valid: [
-    //   {
-    //     code: `
-    //       <div>
-    //         <div>Test</div>
-    //       </div>
-    //     `,
-    //   },
-    //   {
-    //     code: `
-    //       <div>
-    //         {test
-    //           ? <div>
-    //               <li>Item1</li>
-    //             </div>
-    //           : <div>False</div>
-    //         }
-    //       </div>
-    //     `,
-    //   },
-    // ],
-    // invalid: [
-    //   {
-    //     code: `
-    //       <div>
-    //           <div>Test</div>
-    //       </div>
-    //     `,
-    //   },
-    //   {
-    //     code: `
-    //       <div>
-    //       <div>Test</div>
-    //       </div>
-    //     `,
-    //   },
-    // ],
-  },
-);
+configTester.run('playlyfe/react-jsx-indent', 'off', {
+  // valid: [
+  //   {
+  //     code: `
+  //       <div>
+  //         <div>Test</div>
+  //       </div>
+  //     `,
+  //   },
+  //   {
+  //     code: `
+  //       <div>
+  //         {test
+  //           ? <div>
+  //               <li>Item1</li>
+  //             </div>
+  //           : <div>False</div>
+  //         }
+  //       </div>
+  //     `,
+  //   },
+  // ],
+  // invalid: [
+  //   {
+  //     code: `
+  //       <div>
+  //           <div>Test</div>
+  //       </div>
+  //     `,
+  //   },
+  //   {
+  //     code: `
+  //       <div>
+  //       <div>Test</div>
+  //       </div>
+  //     `,
+  //   },
+  // ],
+});
 
-configTester.run(
-  'playlyfe/react-jsx-indent-props',
-  'off',
-  {
-    // valid: [
-    //   {
-    //     code: `
-    //       <div
-    //         value={5}
-    //         styles="styles"
-    //       />
-    //     `,
-    //   },
-    //   {
-    //     // issue with ternary
-    //     code: `
-    //       <div>
-    //         {someCondition
-    //           ? <div
-    //               id="test"
-    //               className="test"
-    //             />
-    //           : <div id="test2" />
-    //         }
-    //       </div>
-    //     `,
-    //   },
-    // ],
-    // invalid: [
-    //   {
-    //     title: 'only 2 spaces indentation',
-    //     code: `
-    //       <div
-    //           value={5}
-    //           styles="styles"
-    //       />
-    //     `,
-    //   },
-    // ],
-  },
-);
+configTester.run('playlyfe/react-jsx-indent-props', 'off', {
+  // valid: [
+  //   {
+  //     code: `
+  //       <div
+  //         value={5}
+  //         styles="styles"
+  //       />
+  //     `,
+  //   },
+  //   {
+  //     // issue with ternary
+  //     code: `
+  //       <div>
+  //         {someCondition
+  //           ? <div
+  //               id="test"
+  //               className="test"
+  //             />
+  //           : <div id="test2" />
+  //         }
+  //       </div>
+  //     `,
+  //   },
+  // ],
+  // invalid: [
+  //   {
+  //     title: 'only 2 spaces indentation',
+  //     code: `
+  //       <div
+  //           value={5}
+  //           styles="styles"
+  //       />
+  //     `,
+  //   },
+  // ],
+});
 
 configTester.run('playlyfe/react-jsx-key', 'error', {
   invalid: [
@@ -501,7 +579,7 @@ configTester.run('playlyfe/react-jsx-no-literals', 'error');
 configTester.run('playlyfe/react-jsx-no-target-blank', 'error', {
   invalid: [
     {
-      code: "<a target='_blank' />",
+      code: '<a target="_blank" href="http://example.com/"></a>',
     },
   ],
 });
@@ -521,6 +599,39 @@ configTester.run('playlyfe/react-jsx-no-undef', 'error', {
       code: `
       <CustomButton name="react" name="styles" />
     `,
+    },
+  ],
+});
+
+configTester.run('playlyfe/react-jsx-one-expression-per-line', 'error');
+
+configTester.run('playlyfe/react-jsx-curly-brace-presence', 'error', {
+  valid: [
+    // props
+    {
+      code: '<Test name="test" />',
+    },
+    {
+      code: '<Test value={5} />',
+    },
+    {
+      code: '<Test value={some_var} />',
+    },
+    // children
+    {
+      code: '<Test>Hello</Test>',
+    },
+  ],
+  invalid: [
+    {
+      code: '<Test name={"test"} />',
+    },
+    {
+      code: '<Test value={`value`} />',
+    },
+    // children
+    {
+      code: '<Test>{"Hello"}</Test>',
     },
   ],
 });
@@ -578,6 +689,7 @@ configTester.run('playlyfe/react-jsx-wrap-multilines', 'error', {
 
 configTester.run('playlyfe/react-forbid-elements', 'off');
 configTester.run('playlyfe/react-forbid-foreign-prop-types', 'off');
+configTester.run('playlyfe/react-no-access-state-in-setstate', 'error');
 configTester.run('playlyfe/react-void-dom-elements-no-children', 'error', {
   valid: [
     {
