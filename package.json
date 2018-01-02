@@ -4,7 +4,7 @@
   "version": "0.0.0-dummy-version",
   "main": "lib/index.js",
   "scripts": {
-    "test": "yarn run check-code && cross-env yarn run testonly -- --coverage",
+    "test": "yarn run check-code && cross-env yarn run testonly --coverage",
     "testonly": "cross-env NODE_ENV=test jest",
     "check-code": "yarn run lint",
     "flow": "flow check",
