@@ -36,8 +36,8 @@
   },
   "homepage": "https://github.com/Mayank1791989/eslint-plugin-playlyfe#readme",
   "dependencies": {
-    "babel-eslint": "8.0.3",
-    "eslint": "4.13.1",
+    "babel-eslint": "8.1.2",
+    "eslint": "4.14.0",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-babel": "4.1.2",
     "eslint-plugin-flowtype": "2.40.1",
