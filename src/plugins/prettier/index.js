@@ -20,6 +20,9 @@ export default {
         ...jsConfig.rules,
         ...renameConfigRules(flowConfig.rules),
         ...renameConfigRules(reactConfig.rules),
+
+        'playlyfe/babel-object-curly-spacing': 'off',
+        'playlyfe/babel-semi': 'off',
       },
     },
   },
