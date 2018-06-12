@@ -23,11 +23,17 @@ export default {
       },
 
       rules: {
+        'playlyfe/flowtype-array-style-complex-type': ['error', 'verbose'],
+        'playlyfe/flowtype-array-style-simple-type': ['error', 'verbose'],
         'playlyfe/flowtype-boolean-style': ['error', 'boolean'],
         'playlyfe/flowtype-define-flow-type': 'error', // (not error) [enabling rule]
         'playlyfe/flowtype-delimiter-dangle': ['error', 'always-multiline'],
         'playlyfe/flowtype-generic-spacing': ['error', 'never'],
+        'playlyfe/flowtype-newline-after-flow-annotation': ['error', 'never'],
         'playlyfe/flowtype-no-dupe-keys': 'error',
+        'playlyfe/flowtype-no-existential-type': 'error',
+        // not enabling now maybe later
+        'playlyfe/flowtype-no-flow-fix-me-comments': 'off',
 
         'playlyfe/flowtype-no-mutable-array': 'off',
 
@@ -37,9 +43,13 @@ export default {
 
         'playlyfe/babel-flowtype-object-type': 'off',
         'playlyfe/flowtype-object-type-delimiter': ['error', 'comma'],
+        // can cause issues
+        'playlyfe/flowtype-require-exact-type': 'off',
 
         'playlyfe/flowtype-require-parameter-type': 'off',
         'playlyfe/flowtype-require-return-type': 'off',
+        // naah
+        'playlyfe/flowtype-require-types-at-top': 'off',
 
         'playlyfe/flowtype-require-valid-file-annotation': [
           'error',
@@ -58,6 +68,8 @@ export default {
 
         // should start with capital letter
         'playlyfe/flowtype-type-id-match': ['error', '^_?([A-Z][A-Za-z0-9]*)$'],
+
+        'playlyfe/flowtype-type-import-style': ['error', 'identifier'],
 
         'playlyfe/flowtype-union-intersection-spacing': ['error', 'always'],
 
