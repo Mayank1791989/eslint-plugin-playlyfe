@@ -21,5 +21,6 @@
   "prettier.trailingComma": "all",
   "prettier.useTabs": false,
 
-  "flow.useNPMPackagedFlow": true
+  "flow.useLSP": true,
+  "flow.pathToFlow": "node_modules/.bin/flow",
 }
