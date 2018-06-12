@@ -28,6 +28,7 @@ export default {
       'playlyfe/react-display-name': ['error', { ignoreTranspilerName: false }],
 
       'playlyfe/react-forbid-component-props': 'off',
+      'playlyfe/react-forbid-dom-props': 'off',
 
       'playlyfe/react-forbid-prop-types': [
         'error',
@@ -72,6 +73,8 @@ export default {
       'playlyfe/react-no-unescaped-entities': 'error',
 
       'playlyfe/react-no-unknown-property': 'error',
+
+      'playlyfe/react-no-unsafe': 'error',
 
       // very buggy after destructuring most of cases if report those variables
       // unused
@@ -138,6 +141,8 @@ export default {
       'playlyfe/react-jsx-closing-bracket-location': ['error', 'tag-aligned'],
 
       'playlyfe/react-jsx-closing-tag-location': 'error',
+
+      'playlyfe/react-jsx-child-element-spacing': 'error',
 
       'playlyfe/react-jsx-curly-spacing': [
         'error',
@@ -228,6 +233,13 @@ export default {
         },
       ],
 
+      'playlyfe/react-jsx-sort-default-props': [
+        'off',
+        {
+          ignoreCase: false,
+        },
+      ],
+
       // Enforce spaces before the closing bracket of self-closing JSX elements
       // https://github.com/yannickcr/eslint-plugin-playlyfe/react-blob/master/docs/rules/jsx-space-before-closing.md
       'playlyfe/react-jsx-space-before-closing': 'off',
@@ -277,6 +289,10 @@ export default {
         'playlyfe/react-jsx-indent': 'off',
         'playlyfe/react-jsx-indent-props': 'off',
       },
+
+      'playlyfe/react-jsx-max-depth': 'off',
+      'playlyfe/react-jsx-props-no-multi-spaces': 'error',
+      'playlyfe/react-no-this-in-sfc': 'error',
     },
   },
 };

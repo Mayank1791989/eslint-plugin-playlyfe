@@ -62,6 +62,7 @@ configTester.run('playlyfe/react-destructuring-assignment', 'error', {
 
 configTester.run('playlyfe/react-display-name', 'error');
 configTester.run('playlyfe/react-forbid-component-props', 'off');
+configTester.run('playlyfe/react-forbid-dom-props', 'off');
 
 configTester.run('playlyfe/react-forbid-prop-types', 'error', {
   invalid: [
@@ -191,6 +192,7 @@ configTester.run('playlyfe/react-no-unknown-property', 'error', {
     },
   ],
 });
+configTester.run('playlyfe/react-no-unsafe', 'error');
 
 configTester.run('playlyfe/react-no-unused-prop-types', 'off');
 configTester.run('playlyfe/react-no-unused-state', 'error');
@@ -269,6 +271,22 @@ configTester.run('playlyfe/react-jsx-boolean-value', 'error', {
     },
   ],
   invalid: [{ code: '<div disabled />' }],
+});
+
+configTester.run('playlyfe/react-jsx-child-element-spacing', 'error', {
+  valid: [
+    {
+      code: '<div>Hello</div>',
+    },
+  ],
+  invalid: [
+    {
+      code: `<div>
+        Sooome link
+        <a>Tst</a>
+      </div>`,
+    },
+  ],
 });
 
 configTester.run('playlyfe/react-jsx-closing-bracket-location', 'error', {
@@ -651,6 +669,7 @@ configTester.run('playlyfe/react-jsx-pascal-case', 'error', {
 });
 
 configTester.run('playlyfe/react-jsx-sort-props', 'off');
+configTester.run('playlyfe/react-jsx-sort-default-props', 'off');
 
 configTester.run('playlyfe/react-jsx-space-before-closing', 'off');
 
@@ -709,3 +728,14 @@ configTester.run('playlyfe/react-void-dom-elements-no-children', 'error', {
 
 configTester.run('playlyfe/react-style-no-numeric-string-value', 'error');
 configTester.run('playlyfe/react-no-will-update-set-state', 'error');
+configTester.run('playlyfe/react-jsx-max-depth', 'off');
+configTester.run('playlyfe/react-jsx-props-no-multi-spaces', 'error', {
+  valid: [{ code: `<div id="test" style={{ color: 'red' }} />` }],
+  invalid: [{ code: `<div id="test"  style={{ color: 'red' }} />` }],
+});
+configTester.run('playlyfe/react-no-this-in-sfc', 'error', {
+  valid: [{ code: `function Test(props) { return <div>{props.name}</div> }` }],
+  invalid: [
+    { code: `function Test(props) { return <div>{this.props.name}</div> }` },
+  ],
+});
