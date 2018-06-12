@@ -70,6 +70,7 @@ export default {
 
         // disallow usage of expressions in statement position
         'no-unused-expressions': 'off',
+        'playlyfe/babel-no-unused-expression': 'off',
         'playlyfe/flowtype-no-unused-expressions': [
           'error',
           {

@@ -225,6 +225,13 @@ module.exports = {
         allowTernary: false,
       },
     ],
+    'playlyfe/babel-no-unused-expressions': [
+      'error',
+      {
+        allowShortCircuit: false,
+        allowTernary: false,
+      },
+    ],
 
     // disallow unused labels
     // http://eslint.org/docs/rules/no-unused-labels

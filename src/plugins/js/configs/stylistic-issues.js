@@ -381,6 +381,7 @@ module.exports = {
 
     // specify whether double or single quotes should be used
     quotes: ['error', 'single', { avoidEscape: true }],
+    'playlyfe/babel-quotes': ['error', 'single', { avoidEscape: true }],
 
     // do not require jsdoc
     // http://eslint.org/docs/rules/require-jsdoc
