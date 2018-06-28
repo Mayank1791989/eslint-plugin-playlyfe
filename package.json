@@ -12,7 +12,6 @@
     "lint": "eslint src",
     "report-coverage": "codecov",
     "build": "rm -rf lib && babel ./src --out-dir ./lib --ignore '**/__tests__/**,**/node_modules/**'",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "commit": "git-cz",
     "precommit": "yarn run test"
   },
@@ -64,7 +63,7 @@
     "husky": "0.14.3",
     "jest": "23.2.0",
     "prettier": "1.13.6",
-    "semantic-release": "8.2.0"
+    "semantic-release": "15.6.0"
   },
   "config": {
     "commitizen": {
