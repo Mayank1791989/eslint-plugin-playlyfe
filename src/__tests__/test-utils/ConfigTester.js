@@ -17,7 +17,9 @@ type TestConfig = $Exact<{
 
 export default class ConfigTester {
   configFile: string;
+
   definedRules: { [ruleId: string]: any };
+
   lint: Function;
 
   constructor({ configFile }: { configFile: string }) {
