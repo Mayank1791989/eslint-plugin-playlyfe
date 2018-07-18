@@ -25,6 +25,7 @@ export default {
 
     rules: {
       'playlyfe/use-exact-dependency': 'error',
+      'playlyfe/freeze-const-object': 'error',
 
       // buggy rules
       'object-curly-newline': 'off',

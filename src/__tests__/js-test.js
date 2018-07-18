@@ -1409,6 +1409,7 @@ configTester.run('playlyfe/use-exact-dependency', 'error', {
   ],
 });
 
+configTester.run('playlyfe/freeze-const-object', 'error');
 // js-imports (import plugin Buggy so for now disabling)
 // configTester.run('playlyfe/import-no-unresolved', 'error');
 // configTester.run('playlyfe/import-named', 'error');
