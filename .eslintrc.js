@@ -16,9 +16,7 @@ module.exports = {
 
   parser: 'babel-eslint',
 
-  plugins: [
-    "prettier",
-  ],
+  plugins: ['prettier'],
 
   env: {
     jest: true,
@@ -31,9 +29,10 @@ module.exports = {
   },
 
   rules: {
-    'no-param-reassign': [ERROR, { 'props': false }],
+    'no-param-reassign': [ERROR, { props: false }],
     'no-underscore-dangle': OFF,
     'global-require': OFF,
     'prettier/prettier': ERROR,
+    'no-use-before-define': ['error', { functions: false, classes: true }],
   },
 };
