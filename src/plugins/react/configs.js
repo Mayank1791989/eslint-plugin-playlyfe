@@ -293,6 +293,14 @@ export default {
       'playlyfe/react-jsx-max-depth': 'off',
       'playlyfe/react-jsx-props-no-multi-spaces': 'error',
       'playlyfe/react-no-this-in-sfc': 'error',
+
+      //
+      'playlyfe/class-property-no-use-before-define': [
+        'error',
+        {
+          ignoreProperties: ['props'],
+        },
+      ],
     },
   },
 };

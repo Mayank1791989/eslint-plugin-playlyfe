@@ -1,23 +1,4 @@
 /* @flow */
-// this will patch eslint to not throw error for eslint-plugin-playlyfe in config.
-
-// Eslint search plugins in node_modules but eslint-plugin-playlfe will not be present there
-// so adding this dir so that this local package will be treated as node module
-// will fix module not found when eslint trying to find module
-// using Module._findPath (see eslint ModuleResolver)
-// $FlowIssue: valid module
-const Module = require('module');
-if (Module.globalPaths.indexOf(__dirname) === -1) {
-  // add path only once (jest watch mode can run this file multiple times)
-  Module.globalPaths.push(__dirname);
-}
-// so that require('eslint-plugin-playlyfe') not throw error
-jest.mock(
-  'eslint-plugin-playlyfe',
-  () => require('./eslint-plugin-playlyfe'), // eslint-disable-line global-require
-  { virtual: true },
-);
-
 // NOTE: dont convert this to import form
 const { CLIEngine } = require('eslint');
 const createRuleFinder = require('eslint-find-rules');
@@ -29,14 +10,9 @@ export function createLinter(configFile: string) {
   const config = {
     useEslintrc: false,
     configFile,
-    plugins: ['playlyfe'],
+    plugins: ['eslint-plugin-playlyfe'],
   };
   const eslintCLI = new CLIEngine(config);
-  eslintCLI.addPlugin(
-    'eslint-plugin-playlyfe',
-    require('./eslint-plugin-playlyfe'),
-  );
-
   return (code: string, ruleId: string, filename?: string) => {
     const report = eslintCLI.executeOnText(code, filename);
     let result = null;
@@ -76,8 +52,6 @@ export function createLinter(configFile: string) {
   };
 }
 
-/* eslint-enable */
-/* eslint-disable */
 export const SEVERITY_NAME = {
   off: 'off',
   warn: 'warn',
@@ -87,11 +61,13 @@ export const SEVERITY_NAME = {
 type Severity = $Keys<typeof SEVERITY_NAME>;
 export type { Severity };
 
+/* eslint-disable no-useless-computed-key */
 const SEVERITY_NUM_TO_NAME_MAP = {
   [0]: SEVERITY_NAME.off,
   [1]: SEVERITY_NAME.warn,
   [2]: SEVERITY_NAME.error,
 };
+/* eslint-enable */
 
 export function getRuleSeverity(ruleDefinition: mixed) {
   if (typeof ruleDefinition === 'number') {

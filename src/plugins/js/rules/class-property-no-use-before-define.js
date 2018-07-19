@@ -1,0 +1,123 @@
+/* @flow */
+module.exports = {
+  meta: {
+    docs: {
+      description: 'check dependencies in package.json are exact',
+    },
+
+    schema: [
+      {
+        type: 'object',
+        properties: {
+          ignoreProperties: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
+        },
+        additionalProperties: false,
+      },
+    ],
+  },
+
+  create(context) {
+    const configuration = context.options[0] || {};
+    const ignoreProperties = (configuration.ignoreProperties || []).reduce(
+      (acc, property) => {
+        acc[property] = true;
+        return acc;
+      },
+      {},
+    );
+    const definedClassProperties = new Map();
+
+    return {
+      ClassBody(node) {
+        definedClassProperties.set(node, {});
+      },
+
+      // eslint-disable-next-line func-names
+      'ClassBody:exit': function(node) {
+        definedClassProperties.delete(node);
+      },
+
+      ClassProperty(node) {
+        const bodyNode = node.parent;
+        const definedProperties = definedClassProperties.get(bodyNode);
+
+        findOtherClassPropertyReferences(
+          node.value,
+          (propertyName, usageNode) => {
+            if (
+              !definedProperties[propertyName] &&
+              !ignoreProperties[propertyName]
+            ) {
+              context.report(
+                usageNode,
+                `class property '${propertyName}' was used before it was defined.`,
+              );
+            }
+          },
+        );
+
+        // add to definedClassProperties
+        if (node.key.type === 'Identifier') {
+          definedProperties[node.key.name] = true;
+          definedClassProperties.set(bodyNode, definedProperties);
+        }
+      },
+    };
+  },
+};
+
+function findOtherClassPropertyReferences(
+  node: ?Object,
+  clb: (propertyName: string, node: any) => void,
+) {
+  if (!node) {
+    return;
+  }
+
+  switch (node.type) {
+    case 'MemberExpression': {
+      // case 1): this.property (ignore computed properties of this[] form)
+      if (node.object.type === 'ThisExpression') {
+        if (!node.computed && node.property.type === 'Identifier') {
+          clb(node.property.name, node);
+        }
+      } else {
+        findOtherClassPropertyReferences(node.object, clb);
+      }
+      break;
+    }
+    // this.property()
+    case 'CallExpression': {
+      // case: this.property()
+      findOtherClassPropertyReferences(node.callee, clb);
+      // case: xyz(this.property)
+      node.arguments.forEach(argNode => {
+        findOtherClassPropertyReferences(argNode, clb);
+      });
+      break;
+    }
+    // Can be present in both key and value
+    case 'ObjectExpression': {
+      // case: in key { [this.property]: any }
+      node.properties.forEach(propertyNode => {
+        findOtherClassPropertyReferences(propertyNode.key, clb);
+        findOtherClassPropertyReferences(propertyNode.value, clb);
+      });
+      break;
+    }
+    // [this.property]
+    case 'ArrayExpression': {
+      node.elements.forEach(elemNode => {
+        findOtherClassPropertyReferences(elemNode, clb);
+      });
+      break;
+    }
+    default:
+      break;
+  }
+}

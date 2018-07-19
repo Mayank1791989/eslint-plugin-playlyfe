@@ -249,6 +249,23 @@ configTester.run('eqeqeq', 'error', {
 });
 
 configTester.run('guard-for-in', 'error');
+configTester.run('max-classes-per-file', 'error', {
+  valid: [
+    {
+      code: `
+        class A {}
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        class A {}
+        class B {}
+      `,
+    },
+  ],
+});
 configTester.run('no-alert', 'error');
 configTester.run('no-caller', 'error');
 configTester.run('no-case-declarations', 'error');
@@ -972,6 +989,7 @@ configTester.run('lines-around-directive', 'error');
 configTester.run('max-depth', 'error');
 configTester.run('max-len', 'error');
 configTester.run('max-lines', 'off');
+configTester.run('max-lines-per-function', 'off');
 configTester.run('max-nested-callbacks', 'error');
 configTester.run('max-params', 'off');
 
@@ -1410,6 +1428,8 @@ configTester.run('playlyfe/use-exact-dependency', 'error', {
 });
 
 configTester.run('playlyfe/freeze-const-object', 'error');
+configTester.run('playlyfe/class-property-no-use-before-define', 'error');
+
 // js-imports (import plugin Buggy so for now disabling)
 // configTester.run('playlyfe/import-no-unresolved', 'error');
 // configTester.run('playlyfe/import-named', 'error');

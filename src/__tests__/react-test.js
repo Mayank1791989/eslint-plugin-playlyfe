@@ -739,3 +739,17 @@ configTester.run('playlyfe/react-no-this-in-sfc', 'error', {
     { code: `function Test(props) { return <div>{this.props.name}</div> }` },
   ],
 });
+
+configTester.run('playlyfe/class-property-no-use-before-define', 'error', {
+  valid: [
+    {
+      code: `
+        class Component extends React.Component {
+          state = {
+            val: this.props.val,
+          };
+        }
+      `,
+    },
+  ],
+});
