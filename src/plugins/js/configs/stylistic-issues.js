@@ -198,6 +198,8 @@ module.exports = {
       },
     ],
 
+    'max-lines-per-function': 'off',
+
     // specify the maximum depth callbacks can be nested
     'max-nested-callbacks': 'error',
 
@@ -370,6 +372,8 @@ module.exports = {
 
     // TODO: enable?
     'padding-line-between-statements': 'off',
+
+    'prefer-object-spread': 'error',
 
     // require quotes around object literal property names
     // http://eslint.org/docs/rules/quote-props.html

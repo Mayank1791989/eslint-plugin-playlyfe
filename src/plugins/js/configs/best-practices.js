@@ -43,6 +43,8 @@ module.exports = {
     // make sure for-in loops have an if statement
     'guard-for-in': 'error',
 
+    'max-classes-per-file': ['error', 1],
+
     // disallow the use of alert, confirm, and prompt
     'no-alert': 'error',
 

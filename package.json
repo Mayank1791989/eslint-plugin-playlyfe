@@ -35,8 +35,7 @@
   },
   "homepage": "https://github.com/Mayank1791989/eslint-plugin-playlyfe#readme",
   "dependencies": {
-    "babel-eslint": "8.2.5",
-    "eslint": "4.19.1",
+    "babel-eslint": "8.2.6",
     "eslint-config-prettier": "2.9.0",
     "eslint-plugin-babel": "5.1.0",
     "eslint-plugin-flowtype": "2.50.0",
@@ -55,6 +54,7 @@
     "cross-env": "5.2.0",
     "cz-conventional-changelog": "2.1.0",
     "dedent-js": "1.0.1",
+    "eslint": "5.1.0",
     "eslint-config-airbnb-base": "13.0.0",
     "eslint-find-rules": "3.3.1",
     "eslint-friendly-formatter": "4.0.1",
@@ -65,6 +65,9 @@
     "prettier": "1.13.7",
     "semantic-release": "15.8.1"
   },
+  "peerDependencies": {
+    "eslint": "^5.1.0"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
@@ -73,6 +76,10 @@
   "jest": {
     "testRegex": "__tests__/.*-test.js$",
     "testEnvironment": "node",
+    "moduleDirectories": [
+      "node_modules",
+      "local_modules"
+    ],
     "roots": [
       "<rootDir>/src"
     ],
