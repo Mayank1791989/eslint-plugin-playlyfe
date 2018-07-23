@@ -31,25 +31,30 @@ module.exports = {
       {},
     );
     const definedClassProperties = new Map();
+    const classMethods = new Map();
 
     return {
       ClassBody(node) {
         definedClassProperties.set(node, {});
+        classMethods.set(node, getClassMethods(node));
       },
 
       // eslint-disable-next-line func-names
       'ClassBody:exit': function(node) {
         definedClassProperties.delete(node);
+        classMethods.delete(node);
       },
 
       ClassProperty(node) {
         const bodyNode = node.parent;
         const definedProperties = definedClassProperties.get(bodyNode);
+        const methods = classMethods.get(bodyNode);
 
         findOtherClassPropertyReferences(
           node.value,
           (propertyName, usageNode) => {
             if (
+              !methods[propertyName] &&
               !definedProperties[propertyName] &&
               !ignoreProperties[propertyName]
             ) {
@@ -120,4 +125,16 @@ function findOtherClassPropertyReferences(
     default:
       break;
   }
+}
+
+function getClassMethods(node) {
+  return node.body.reduce((acc, bodyNode) => {
+    if (
+      bodyNode.type === 'MethodDefinition' &&
+      bodyNode.key.type === 'Identifier'
+    ) {
+      acc[bodyNode.key.name] = true;
+    }
+    return acc;
+  }, {});
 }

@@ -70,6 +70,18 @@ ruleTester.run('class-property-no-use-before-define', rule, {
         }
       `,
     },
+    {
+      code: dedent`
+        class Test {
+          x = {
+            value: this.getY()
+          }
+          getY() {
+            console.log("this is class method");
+          }
+        }
+      `,
+    },
   ],
 
   invalid: [
