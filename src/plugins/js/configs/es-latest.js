@@ -58,9 +58,7 @@ module.exports = {
 
     // disallow importing from the same path more than once
     // http://eslint.org/docs/rules/no-duplicate-imports
-    // is enabled using import/no-duplicate-imports [see imports.js]
-    // as this doesn't support flow types
-    'no-duplicate-imports': 'off',
+    'no-duplicate-imports': 'error',
 
     // disallow symbol constructor
     // http://eslint.org/docs/rules/no-new-symbol

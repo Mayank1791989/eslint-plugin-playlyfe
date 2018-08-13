@@ -1321,7 +1321,7 @@ configTester.run('no-confusing-arrow', 'error', {
 
 configTester.run('no-const-assign', 'error');
 configTester.run('no-dupe-class-members', 'error');
-configTester.run('no-duplicate-imports', 'off');
+configTester.run('no-duplicate-imports', 'error');
 configTester.run('no-new-symbol', 'error');
 configTester.run('no-restricted-imports', 'off');
 configTester.run('no-this-before-super', 'error');

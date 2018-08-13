@@ -70,7 +70,9 @@ module.exports = {
     'playlyfe/import-first': 'error',
     'playlyfe/import-imports-first': 'off', // deprecated
 
+    'no-duplicate-imports': 'off',
     'playlyfe/import-no-duplicates': 'error',
+
     'playlyfe/import-no-namespace': 'error',
     'playlyfe/import-extensions': ['error', 'always', { js: 'never' }],
     'playlyfe/import-order': [
