@@ -17,3 +17,4 @@ configTester.run('playlyfe/prettier', 'error', {
 
 configTester.run('playlyfe/babel-object-curly-spacing', 'off');
 configTester.run('playlyfe/babel-semi', 'off');
+configTester.run('playlyfe/flowtype-boolean-style', 'off');
