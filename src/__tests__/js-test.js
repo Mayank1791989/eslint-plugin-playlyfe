@@ -1399,34 +1399,6 @@ configTester.run('template-curly-spacing', 'error', {
 configTester.run('yield-star-spacing', 'error');
 configTester.run('sort-imports', 'off');
 
-// json
-configTester.run('playlyfe/use-exact-dependency', 'error', {
-  valid: [
-    {
-      filename: 'package.json',
-      code: `
-        {
-          "dependencies": {
-            "dependency1": "1.2.3"
-          },
-        }
-      `,
-    },
-  ],
-  invalid: [
-    {
-      filename: 'package.json',
-      code: `
-        {
-          "dependencies": {
-            "dependency1": "^1.2.3"
-          },
-        }
-      `,
-    },
-  ],
-});
-
 configTester.run('playlyfe/freeze-const-object', 'error');
 configTester.run('playlyfe/class-property-no-use-before-define', 'error');
 

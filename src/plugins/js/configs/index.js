@@ -24,7 +24,6 @@ export default {
     ].map(require.resolve),
 
     rules: {
-      'playlyfe/use-exact-dependency': 'error',
       'playlyfe/freeze-const-object': 'error',
       'playlyfe/class-property-no-use-before-define': 'error',
 

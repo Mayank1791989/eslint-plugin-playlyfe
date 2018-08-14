@@ -7,5 +7,6 @@ module.exports = {
     'plugin:playlyfe/react',
     'plugin:playlyfe/relay',
     'plugin:playlyfe/react-intl',
+    'plugin:playlyfe/json',
   ],
 };

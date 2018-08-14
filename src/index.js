@@ -6,8 +6,7 @@ import reactIntl from './plugins/react-intl';
 import flowtype from './plugins/flowtype';
 import testing from './plugins/testing';
 import prettier from './plugins/prettier';
-
-import jsonPreprocessor from './processors/json';
+import json from './plugins/json';
 
 const plugin = {
   rules: {
@@ -18,11 +17,11 @@ const plugin = {
     ...relay.rules,
     ...testing.rules,
     ...prettier.rules,
+    ...json.rules,
   },
 
-  // json pre processor
   processors: {
-    '.json': jsonPreprocessor,
+    ...json.processors,
   },
 
   configs: {
@@ -33,6 +32,7 @@ const plugin = {
     ...relay.configs,
     ...testing.configs,
     ...prettier.configs,
+    ...json.configs,
   },
 };
 
