@@ -274,6 +274,8 @@ module.exports = {
     // require await
     'require-await': 'error',
 
+    'require-unicode-regexp': 'error',
+
     // requires to declare all vars on top of their containing scope
     'vars-on-top': 'error',
 

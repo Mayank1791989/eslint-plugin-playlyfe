@@ -6,6 +6,8 @@ module.exports = {
 
     'getter-return': ['error', { allowImplicit: true }],
 
+    'no-async-promise-executor': 'error',
+
     'no-await-in-loop': 'error',
     'playlyfe/babel-no-await-in-loop': 'off',
 
@@ -76,6 +78,8 @@ module.exports = {
     // disallow irregular whitespace outside of strings and comments
     'no-irregular-whitespace': 'error',
 
+    'no-misleading-character-class': 'error',
+
     // disallow the use of object properties of the global object (Math and JSON) as functions
     'no-obj-calls': 'error',
 
@@ -107,6 +111,9 @@ module.exports = {
     // disallow negating the left operand of relational operators
     // http://eslint.org/docs/rules/no-unsafe-negation
     'no-unsafe-negation': 'error',
+
+    'require-atomic-updates': 'error',
+
     'no-negated-in-lhs': 'off',
 
     // disallow comparisons with the value NaN

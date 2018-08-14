@@ -33,6 +33,8 @@ configTester.run('getter-return', 'error', {
   ],
 });
 
+configTester.run('no-async-promise-executor', 'error');
+
 configTester.run('no-await-in-loop', 'error');
 configTester.run('playlyfe/babel-no-await-in-loop', 'off');
 
@@ -169,11 +171,11 @@ configTester.run('no-inner-declarations', 'error', {
   ],
 });
 
-configTester.run('no-invalid-regexp', 'error', {
-  invalid: [{ code: "RegExp('[')" }],
-});
+configTester.run('no-invalid-regexp', 'error');
 
 configTester.run('no-irregular-whitespace', 'error');
+
+configTester.run('no-misleading-character-class', 'error');
 
 configTester.run('no-obj-calls', 'error', {
   invalid: [{ code: 'const test = Math();' }],
@@ -195,6 +197,7 @@ configTester.run('no-unexpected-multiline', 'error');
 configTester.run('no-unreachable', 'error');
 configTester.run('no-unsafe-finally', 'error');
 configTester.run('no-unsafe-negation', 'error');
+configTester.run('require-atomic-updates', 'error');
 configTester.run('use-isnan', 'error');
 
 configTester.run('valid-jsdoc', 'off'); // we dont use jsdoc
@@ -408,6 +411,7 @@ configTester.run('no-with', 'error');
 configTester.run('prefer-promise-reject-errors', 'error');
 configTester.run('radix', 'error');
 configTester.run('require-await', 'error');
+configTester.run('require-unicode-regexp', 'error');
 configTester.run('vars-on-top', 'error');
 
 configTester.run('wrap-iife', 'error', {
