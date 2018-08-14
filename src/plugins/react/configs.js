@@ -203,7 +203,10 @@ export default {
       // https://github.com/yannickcr/eslint-plugin-playlyfe/react-blob/master/docs/rules/jsx-no-undef.md
       'playlyfe/react-jsx-no-undef': 'error',
 
-      'playlyfe/react-jsx-one-expression-per-line': 'error',
+      'playlyfe/react-jsx-one-expression-per-line': [
+        'error',
+        { allow: 'none' },
+      ],
 
       'playlyfe/react-jsx-curly-brace-presence': [
         'error',
