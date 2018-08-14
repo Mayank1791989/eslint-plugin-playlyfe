@@ -55,15 +55,15 @@
     "cz-conventional-changelog": "2.1.0",
     "dedent-js": "1.0.1",
     "eslint": "5.1.0",
-    "eslint-config-airbnb-base": "13.0.0",
+    "eslint-config-airbnb-base": "13.1.0",
     "eslint-find-rules": "3.3.1",
     "eslint-friendly-formatter": "4.0.1",
-    "flow-bin": "0.76.0",
+    "flow-bin": "0.78.0",
     "flow-typed": "2.5.1",
     "husky": "0.14.3",
-    "jest": "23.4.1",
-    "prettier": "1.13.7",
-    "semantic-release": "15.8.1"
+    "jest": "23.5.0",
+    "prettier": "1.14.2",
+    "semantic-release": "15.9.8"
   },
   "peerDependencies": {
     "eslint": "^5.1.0"
