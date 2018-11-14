@@ -101,6 +101,7 @@ configTester.run('playlyfe/flowtype-object-type-delimiter', 'error', {
   // invalid: [{ code: 'type test = { test1: string; test2: string };' }],
 });
 
+configTester.run('playlyfe/flowtype-require-compound-type-alias', 'off');
 configTester.run('playlyfe/flowtype-require-exact-type', 'off');
 configTester.run('playlyfe/flowtype-require-parameter-type', 'off');
 configTester.run('playlyfe/flowtype-require-return-type', 'off');

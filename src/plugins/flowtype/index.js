@@ -43,6 +43,10 @@ export default {
 
         'playlyfe/babel-flowtype-object-type': 'off',
         'playlyfe/flowtype-object-type-delimiter': ['error', 'comma'],
+
+        // not sure
+        'playlyfe/flowtype-require-compound-type-alias': 'off',
+
         // can cause issues
         'playlyfe/flowtype-require-exact-type': 'off',
 
