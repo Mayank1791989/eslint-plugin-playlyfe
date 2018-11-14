@@ -201,7 +201,16 @@ configTester.run('require-atomic-updates', 'error');
 configTester.run('use-isnan', 'error');
 
 configTester.run('valid-jsdoc', 'off'); // we dont use jsdoc
-configTester.run('valid-typeof', 'error');
+
+configTester.run('valid-typeof', 'off');
+configTester.run('playlyfe/babel-valid-typeof', 'error', {
+  invalid: [{ code: "typeof foo === 'stiing'" }],
+  valid: [
+    {
+      code: "typeof BigInt(9007199254740991) === 'bigint'",
+    },
+  ],
+});
 
 // best-practices
 configTester.run('accessor-pairs', 'error');
