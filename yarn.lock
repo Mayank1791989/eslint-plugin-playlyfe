@@ -3082,9 +3082,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
-flow-bin@0.78.0:
-  version "0.78.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.78.0.tgz#df9fe7f9c9a2dfaff39083949fe2d831b41627b7"
+flow-bin@0.86.0:
+  version "0.86.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.86.0.tgz#153a28722b4dc13b7200c74b644dd4d9f4969a11"
+  integrity sha512-ulRvFH3ewGIYwg+qPk/OJXoe3Nhqi0RyR0wqgK0b1NzUDEC6O99zU39MBTickXvlrr6iwRO6Wm4lVGeDmnzbew==
 
 flow-runtime@0.17.0:
   version "0.17.0"
@@ -4281,7 +4282,7 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^23.6.0:
+jest-cli@^23.5.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-23.6.0.tgz#61ab917744338f443ef2baa282ddffdd658a5da4"
   integrity sha512-hgeD1zRUp1E1zsiyOXjEn4LzRLWdJBV//ukAHGlx6s5mfCNJTbhbHjgxnDUXA8fsKWN/HqFFF6X5XcCwC/IvYQ==
@@ -4576,13 +4577,13 @@ jest-worker@^23.2.0:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@23.6.0:
-  version "23.6.0"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
-  integrity sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
+jest@23.5.0:
+  version "23.5.0"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-23.5.0.tgz#80de353d156ea5ea4a7332f7962ac79135fbc62e"
+  integrity sha512-+X3Fk4rD8dTnHoIxHJymZthbtYllvSOnXAApQltvyLkHsv+fqyC/SZptUJDbXkFsqZJyyIXMySkdzerz3fv4oQ==
   dependencies:
     import-local "^1.0.0"
-    jest-cli "^23.6.0"
+    jest-cli "^23.5.0"
 
 jodid25519@^1.0.0:
   version "1.0.2"
