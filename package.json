@@ -7,7 +7,6 @@
     "test": "yarn check-code && cross-env yarn testonly --coverage",
     "testonly": "cross-env NODE_ENV=test jest",
     "check-code": "yarn lint",
-    "flow": "flow check",
     "flow-typed-update": "rm -rf && flow-typed update",
     "lint": "eslint src",
     "report-coverage": "codecov",

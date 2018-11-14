@@ -11,17 +11,17 @@ export default {
 
     extends: [
       // js
-      './possible-errors',
-      './strict-mode',
-      './best-practices',
-      './variables',
-      './stylistic-issues',
-      // './imports', (Buggy will see later)
-      './node-commonjs',
+      require.resolve('./possible-errors'),
+      require.resolve('./strict-mode'),
+      require.resolve('./best-practices'),
+      require.resolve('./variables'),
+      require.resolve('./stylistic-issues'),
+      // require.resolve('./imports'), (Buggy will see later)
+      require.resolve('./node-commonjs'),
 
       // es
-      './es-latest',
-    ].map(require.resolve),
+      require.resolve('./es-latest'),
+    ],
 
     rules: {
       'playlyfe/freeze-const-object': 'error',

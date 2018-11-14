@@ -225,7 +225,15 @@ const CSSProperty = {
   },
 };
 
-function errorMessage({ property, rawValue, fixedRawValue }) {
+function errorMessage({
+  property,
+  rawValue,
+  fixedRawValue,
+}: {
+  property: string,
+  rawValue: string,
+  fixedRawValue: string,
+}) {
   /* eslint-disable max-len */
   return `use ${fixedRawValue} (not ${rawValue}). '${property}' value = ${rawValue} is numeric string value which react(v15) will treat as a unitless number.`;
   /* eslint-enable max-len */
