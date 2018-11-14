@@ -2,8 +2,10 @@
 /* global JestExpectType, JestExpectTypeExtended */
 import dedent from 'dedent-js';
 import chalk from 'chalk';
+import { CLIEngine } from 'eslint';
 import {
   createLinter,
+  createCLIEngine,
   createRuleFinder,
   getRuleSeverity,
   getSuggestionsForMissingRule,
@@ -22,11 +24,25 @@ export default class ConfigTester {
 
   lint: Function;
 
+  cliEngine: CLIEngine;
+
   constructor({ configFile }: { configFile: string }) {
     this.configFile = configFile;
     const ruleFinder = createRuleFinder(configFile);
     this.definedRules = ruleFinder.getCurrentRulesDetailed();
     this.lint = createLinter(configFile);
+    this.cliEngine = createCLIEngine(configFile);
+  }
+
+  parse(code: string) {
+    const { results } = this.cliEngine.executeOnText(code);
+    const { messages } = results[0];
+    messages.forEach(message => {
+      // NOTE: fatal means there is some parseError
+      if (message.fatal) {
+        throw new Error(message.message);
+      }
+    });
   }
 
   run(ruleId: string, severity: Severity, testConfig?: TestConfig) {

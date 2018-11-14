@@ -6,13 +6,18 @@ const eslintFormatter = require('eslint-friendly-formatter');
 const leven = require('leven');
 
 export { createRuleFinder };
-export function createLinter(configFile: string) {
+
+export function createCLIEngine(configFile: string): CLIEngine {
   const config = {
     useEslintrc: false,
     configFile,
     plugins: ['eslint-plugin-playlyfe'],
   };
-  const eslintCLI = new CLIEngine(config);
+  return new CLIEngine(config);
+}
+
+export function createLinter(configFile: string) {
+  const eslintCLI = createCLIEngine(configFile);
   return (code: string, ruleId: string, filename?: string) => {
     const report = eslintCLI.executeOnText(code, filename);
     let result = null;
@@ -86,7 +91,7 @@ export function getRuleSeverity(ruleDefinition: mixed) {
 export function getSuggestionsForMissingRule(
   missingRuleId: string,
   allRules: Array<string>,
-) {
+): Array<string> {
   return allRules
     .map(item => ({ dist: leven(missingRuleId, item), item }))
     .sort((a, b) => a.dist - b.dist)

@@ -1406,6 +1406,14 @@ configTester.run('sort-imports', 'off');
 configTester.run('playlyfe/freeze-const-object', 'error');
 configTester.run('playlyfe/class-property-no-use-before-define', 'error');
 
+test('should able to parse flow function with TypeArguments', () => {
+  expect(() => {
+    configTester.parse(`
+      export default createXYZ<T, T>(val);
+    `);
+  }).not.toThrow();
+});
+
 // js-imports (import plugin Buggy so for now disabling)
 // configTester.run('playlyfe/import-no-unresolved', 'error');
 // configTester.run('playlyfe/import-named', 'error');
