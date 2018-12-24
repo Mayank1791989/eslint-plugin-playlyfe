@@ -242,6 +242,9 @@ module.exports = {
     // disallow unnecessary .call() and .apply()
     'no-useless-call': 'error',
 
+    // disallow unnecessary catch
+    'no-useless-catch': 'error',
+
     // disallow useless string concatenation
     // http://eslint.org/docs/rules/no-useless-concat
     'no-useless-concat': 'error',

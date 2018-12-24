@@ -411,6 +411,7 @@ configTester.run('no-unused-expressions', 'error', {
 
 configTester.run('no-unused-labels', 'error');
 configTester.run('no-useless-call', 'error');
+configTester.run('no-useless-catch', 'error');
 configTester.run('no-useless-concat', 'error');
 configTester.run('no-useless-escape', 'error');
 configTester.run('no-useless-return', 'error');
