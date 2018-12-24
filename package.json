@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/Mayank1791989/eslint-plugin-playlyfe#readme",
   "dependencies": {
-    "@babel/runtime": "7.1.5",
+    "@babel/runtime": "7.2.0",
     "babel-eslint": "10.0.1",
     "eslint-config-prettier": "3.3.0",
     "eslint-plugin-babel": "5.2.1",
