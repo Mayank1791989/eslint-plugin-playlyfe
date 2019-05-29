@@ -13,6 +13,7 @@ export default {
         'playlyfe/react-intl-no-missing-id': 'error',
         'playlyfe/react-intl-no-undef-id': 'error',
         'playlyfe/react-intl-no-untranslated-string': 'error',
+        'playlyfe/react-intl-strict-message-values': 'error',
       },
     },
   },
