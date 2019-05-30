@@ -5,6 +5,7 @@ import renameConfigRules from '../../utils/renameConfigRules';
 import jsConfig from 'eslint-config-prettier';
 import flowConfig from 'eslint-config-prettier/flowtype';
 import reactConfig from 'eslint-config-prettier/react';
+import babelConfig from 'eslint-config-prettier/babel';
 
 export default {
   rules: {
@@ -20,9 +21,7 @@ export default {
         ...jsConfig.rules,
         ...renameConfigRules(flowConfig.rules),
         ...renameConfigRules(reactConfig.rules),
-
-        'playlyfe/babel-object-curly-spacing': 'off',
-        'playlyfe/babel-semi': 'off',
+        ...renameConfigRules(babelConfig.rules),
       },
     },
   },
