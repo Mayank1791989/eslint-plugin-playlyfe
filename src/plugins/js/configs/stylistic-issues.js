@@ -23,6 +23,8 @@ module.exports = {
 
     // require camel case names
     camelcase: ['error', { properties: 'always' }],
+    // TODO: enable when we required this rule
+    'playlyfe/babel-camelcase': 'off',
 
     // enforce comma
     'comma-dangle': [
