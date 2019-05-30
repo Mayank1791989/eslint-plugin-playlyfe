@@ -753,3 +753,49 @@ configTester.run('playlyfe/class-property-no-use-before-define', 'error', {
     },
   ],
 });
+
+configTester.run('playlyfe/react-jsx-fragments', 'error', {
+  valid: [
+    { code: '<><Foo /></>' },
+    { code: '<React.Fragment key="key"><Foo /></React.Fragment>' },
+  ],
+  invalid: [{ code: '<React.Fragment><Foo /></ React.Fragment>' }],
+});
+
+configTester.run('playlyfe/react-state-in-constructor', 'error', {
+  valid: [
+    {
+      code: `
+        class Foo extends React.Component {
+          state = { bar: 0 }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        class Foo extends React.Component {
+          constructor(props) {
+            super(props)
+            this.state = { bar: 0 }
+          }
+          render() {
+            return <div>Foo</div>
+          }
+        }
+      `,
+    },
+  ],
+});
+
+configTester.run('playlyfe/react-static-property-placement', 'off');
+
+configTester.run('playlyfe/react-jsx-props-no-spreading', 'error', {
+  invalid: [{ code: `<img {...props} />` }, { code: `<Test {...props} />` }],
+});
+
+configTester.run('playlyfe/react-prefer-read-only-props', 'off');

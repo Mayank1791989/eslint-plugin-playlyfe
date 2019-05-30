@@ -5,7 +5,7 @@ module.exports = {
   settings: {
     react: {
       createClass: 'createClass',
-      version: '15.0',
+      version: '16.3',
     },
   },
 };

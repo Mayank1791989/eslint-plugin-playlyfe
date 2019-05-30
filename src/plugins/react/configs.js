@@ -304,6 +304,16 @@ export default {
           ignoreProperties: ['props'],
         },
       ],
+
+      'playlyfe/react-jsx-fragments': ['error', 'syntax'],
+      'playlyfe/react-state-in-constructor': ['error', 'never'],
+      'playlyfe/react-static-property-placement': ['off'],
+      'playlyfe/react-jsx-props-no-spreading': [
+        'error',
+        { html: 'enforce', custom: 'enforce' },
+      ],
+      // NOTE sure rule is stable will enable in future
+      'playlyfe/react-prefer-read-only-props': 'off',
     },
   },
 };
