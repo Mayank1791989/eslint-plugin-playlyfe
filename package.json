@@ -54,7 +54,7 @@
     "cross-env": "5.2.0",
     "cz-conventional-changelog": "2.1.0",
     "dedent-js": "1.0.1",
-    "eslint": "5.11.0",
+    "eslint": "5.16.0",
     "eslint-find-rules": "3.3.1",
     "eslint-friendly-formatter": "4.0.1",
     "eslint-plugin-playlyfe": "6.3.0",
@@ -66,7 +66,7 @@
     "semantic-release": "15.13.12"
   },
   "peerDependencies": {
-    "eslint": "^5.11.0"
+    "eslint": "^5.16.0"
   },
   "husky": {
     "hooks": {

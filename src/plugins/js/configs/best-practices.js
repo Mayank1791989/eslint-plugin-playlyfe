@@ -263,6 +263,8 @@ module.exports = {
     // disallow use of the with statement
     'no-with': 'error',
 
+    'prefer-named-capture-group': 'error',
+
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }],
 
     // // disallow usage of configurable warning terms in comments: e.g. todo

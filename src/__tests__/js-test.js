@@ -418,6 +418,7 @@ configTester.run('no-useless-return', 'error');
 configTester.run('no-void', 'error');
 configTester.run('no-warning-comments', 'warn');
 configTester.run('no-with', 'error');
+configTester.run('prefer-named-capture-group', 'error');
 configTester.run('prefer-promise-reject-errors', 'error');
 configTester.run('radix', 'error');
 configTester.run('require-await', 'error');
