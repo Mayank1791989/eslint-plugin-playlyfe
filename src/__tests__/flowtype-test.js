@@ -226,3 +226,7 @@ configTester.run('playlyfe/flowtype-no-unused-expressions', 'error', {
     },
   ],
 });
+
+configTester.run('playlyfe/flowtype-no-mixed', 'off');
+configTester.run('playlyfe/flowtype-spread-exact-type', 'off');
+configTester.run('playlyfe/flowtype-require-readonly-react-props', 'off');

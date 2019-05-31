@@ -94,6 +94,13 @@ export default {
             allowTernary: false,
           },
         ],
+
+        // not sure this is correct
+        'playlyfe/flowtype-no-mixed': 'off',
+        // It's better flow report this (not eslint).
+        'playlyfe/flowtype-spread-exact-type': 'off',
+        // will do in future
+        'playlyfe/flowtype-require-readonly-react-props': 'off',
       },
     },
   },
