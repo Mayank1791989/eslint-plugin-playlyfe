@@ -730,13 +730,13 @@ configTester.run('playlyfe/react-style-no-numeric-string-value', 'error');
 configTester.run('playlyfe/react-no-will-update-set-state', 'error');
 configTester.run('playlyfe/react-jsx-max-depth', 'off');
 configTester.run('playlyfe/react-jsx-props-no-multi-spaces', 'error', {
-  valid: [{ code: `<div id="test" style={{ color: 'red' }} />` }],
-  invalid: [{ code: `<div id="test"  style={{ color: 'red' }} />` }],
+  valid: [{ code: '<div id="test" style={{ color: \'red\' }} />' }],
+  invalid: [{ code: '<div id="test"  style={{ color: \'red\' }} />' }],
 });
 configTester.run('playlyfe/react-no-this-in-sfc', 'error', {
-  valid: [{ code: `function Test(props) { return <div>{props.name}</div> }` }],
+  valid: [{ code: 'function Test(props) { return <div>{props.name}</div> }' }],
   invalid: [
-    { code: `function Test(props) { return <div>{this.props.name}</div> }` },
+    { code: 'function Test(props) { return <div>{this.props.name}</div> }' },
   ],
 });
 
@@ -795,7 +795,7 @@ configTester.run('playlyfe/react-state-in-constructor', 'error', {
 configTester.run('playlyfe/react-static-property-placement', 'off');
 
 configTester.run('playlyfe/react-jsx-props-no-spreading', 'error', {
-  invalid: [{ code: `<img {...props} />` }, { code: `<Test {...props} />` }],
+  invalid: [{ code: '<img {...props} />' }, { code: '<Test {...props} />' }],
 });
 
 configTester.run('playlyfe/react-prefer-read-only-props', 'off');

@@ -167,12 +167,12 @@ configTester.run('playlyfe/flowtype-space-before-type-colon', 'error', {
 configTester.run('playlyfe/flowtype-type-import-style', 'error', {
   valid: [
     {
-      code: `import { type Test } from './test';`,
+      code: "import { type Test } from './test';",
     },
   ],
   invalid: [
     {
-      code: `import type { Test } from './test';`,
+      code: "import type { Test } from './test';",
     },
   ],
 });

@@ -1,3 +1,4 @@
+/* @flow */
 module.exports = {
   rules: {
     // enforce or disallow variable initializations at definition

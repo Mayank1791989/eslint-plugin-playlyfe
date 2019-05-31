@@ -4,35 +4,24 @@ const WARN = 1;
 const ERROR = 2;
 
 module.exports = {
+  root: true /* restrict to this level */,
+
   extends: [
-    'eslint-config-airbnb-base/rules/best-practices',
-    'eslint-config-airbnb-base/rules/errors',
-    'eslint-config-airbnb-base/rules/node',
-    'eslint-config-airbnb-base/rules/style',
-    'eslint-config-airbnb-base/rules/variables',
-    'eslint-config-airbnb-base/rules/es6',
-    'eslint-config-prettier',
-  ].map(require.resolve),
+    'plugin:playlyfe/js',
+    'plugin:playlyfe/flowtype',
+    'plugin:playlyfe/prettier',
+    'plugin:playlyfe/testing:jest',
+  ],
+
+  env: {
+    node: true
+  },
 
   parser: 'babel-eslint',
 
-  plugins: ['prettier'],
-
-  env: {
-    jest: true,
-  },
-
-  globals: {
-    $Exact: false,
-    $Keys: false,
-    jasmine: false,
-  },
+  plugins: ['eslint-plugin-playlyfe'],
 
   rules: {
-    'no-param-reassign': [ERROR, { props: false }],
-    'no-underscore-dangle': OFF,
-    'global-require': OFF,
-    'prettier/prettier': ERROR,
-    'no-use-before-define': ['error', { functions: false, classes: true }],
+    'require-unicode-regexp': 'off',
   },
 };

@@ -1,10 +1,10 @@
 /* @flow */
-const ATTRS_TO_CHECK = {
+const ATTRS_TO_CHECK = Object.freeze({
   // @TODO make it editable from outside
   title: true,
   subtitle: true,
   placeholder: true,
-};
+});
 
 module.exports = {
   meta: {
@@ -26,7 +26,7 @@ module.exports = {
           if (pos === -1) {
             line += 1;
           } else {
-            column = index !== 0 ? pos : column + pos;
+            column = index === 0 ? column + pos : pos;
             return true; // break loop
           }
           return false; // continue

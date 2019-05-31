@@ -15,7 +15,7 @@ module.exports = {
     }
 
     const { reactIntlFilePath } = context.options[0] || {};
-    let reactIntlJson;
+    let reactIntlJson = null;
     const fileStartLoc = { line: 1, column: 0 };
 
     if (!reactIntlFilePath) {

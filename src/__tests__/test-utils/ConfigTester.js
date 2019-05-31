@@ -36,6 +36,7 @@ export default class ConfigTester {
 
   parse(code: string) {
     const { results } = this.cliEngine.executeOnText(code);
+    // eslint-disable-next-line prefer-destructuring
     const { messages } = results[0];
     messages.forEach(message => {
       // NOTE: fatal means there is some parseError
@@ -52,12 +53,14 @@ export default class ConfigTester {
   }
 
   runOnly(ruleId: string, severity: Severity, testConfig?: TestConfig) {
+    // eslint-disable-next-line no-restricted-properties
     describe.only(ruleId, () => {
       this.describeFunc(ruleId, severity, testConfig);
     });
   }
 
   runSkip(ruleId: string, severity: Severity, testConfig?: TestConfig) {
+    // eslint-disable-next-line no-restricted-properties
     describe.skip(ruleId, () => {
       this.describeFunc(ruleId, severity, testConfig);
     });

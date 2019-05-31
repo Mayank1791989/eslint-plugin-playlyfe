@@ -55,9 +55,9 @@
     "cz-conventional-changelog": "2.1.0",
     "dedent-js": "1.0.1",
     "eslint": "5.11.0",
-    "eslint-config-airbnb-base": "13.1.0",
     "eslint-find-rules": "3.3.1",
     "eslint-friendly-formatter": "4.0.1",
+    "eslint-plugin-playlyfe": "6.2.1",
     "flow-bin": "0.99.1",
     "flow-typed": "2.5.2",
     "husky": "2.3.0",
@@ -82,8 +82,8 @@
     "testRegex": "__tests__/.*-test.js$",
     "testEnvironment": "node",
     "moduleDirectories": [
-      "node_modules",
-      "local_modules"
+      "local_modules",
+      "node_modules"
     ],
     "roots": [
       "<rootDir>/src"

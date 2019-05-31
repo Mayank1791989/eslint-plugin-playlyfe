@@ -21,7 +21,7 @@ export function getStringNodeValue(node): ?{ value: string, loc: any } {
 }
 
 export function getTemplateLiteralStringValue(literalNode) {
-  const templateElem = literalNode.quasis[0];
+  const [templateElem] = literalNode.quasis;
   return templateElem
     ? { value: templateElem.value.raw, loc: templateElem.loc }
     : null;

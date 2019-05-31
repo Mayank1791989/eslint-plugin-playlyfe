@@ -57,21 +57,21 @@ export function createLinter(configFile: string) {
   };
 }
 
-export const SEVERITY_NAME = {
+export const SEVERITY_NAME = Object.freeze({
   off: 'off',
   warn: 'warn',
   error: 'error',
-};
+});
 
 type Severity = $Keys<typeof SEVERITY_NAME>;
 export type { Severity };
 
 /* eslint-disable no-useless-computed-key */
-const SEVERITY_NUM_TO_NAME_MAP = {
+const SEVERITY_NUM_TO_NAME_MAP = Object.freeze({
   [0]: SEVERITY_NAME.off,
   [1]: SEVERITY_NAME.warn,
   [2]: SEVERITY_NAME.error,
-};
+});
 /* eslint-enable */
 
 export function getRuleSeverity(ruleDefinition: mixed) {
