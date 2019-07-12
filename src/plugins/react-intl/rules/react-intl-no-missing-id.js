@@ -1,7 +1,8 @@
 /* @flow */
+import { type EslintRule } from 'eslint';
 import isLocaleFile from './utils/isLocaleFile';
 
-module.exports = {
+const Rule: EslintRule = {
   meta: {
     docs: {
       description: 'find keys in code which are not in translated file',
@@ -95,3 +96,5 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;

@@ -1,8 +1,10 @@
 /* @flow */
+import { type EslintRule } from 'eslint';
+import * as icu from './utils/icu';
 import * as astUtils from './utils/astUtils';
-import { getMessageArguments } from './utils/intlMessageFormat';
+import reactIntlVisitor from './utils/reactIntlVisitor';
 
-module.exports = {
+const Rule: EslintRule = {
   meta: {
     docs: {
       description:
@@ -11,26 +13,9 @@ module.exports = {
   },
 
   create(context) {
-    return {
-      CallExpression(node) {
-        //
-        if (
-          !(
-            node.callee &&
-            node.callee.type === 'Identifier' &&
-            node.callee.name === 'defineMessages'
-          )
-        ) {
-          return;
-        }
-
-        const [valueNode] = node.arguments;
-
-        if (!valueNode || valueNode.type !== 'ObjectExpression') {
-          return;
-        }
-
-        valueNode.properties.forEach(property => {
+    return reactIntlVisitor({
+      defineMessages(node) {
+        node.properties.forEach(property => {
           if (property.value.type !== 'ObjectExpression') {
             return;
           }
@@ -51,9 +36,9 @@ module.exports = {
             return;
           }
 
-          const messageArgs = getMessageArguments(messageNode.value);
+          const message = icu.getMessageArguments(messageNode.value);
 
-          if (messageArgs.length > 0) {
+          if (message.args.length > 0) {
             context.report({
               node: property.key,
               message:
@@ -62,6 +47,8 @@ module.exports = {
           }
         });
       },
-    };
+    });
   },
 };
+
+module.exports = Rule;

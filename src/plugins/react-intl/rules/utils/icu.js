@@ -3,13 +3,21 @@ import IntlMessageFormatParser, {
   type ArgumentElement,
 } from 'intl-messageformat-parser';
 
-export function getMessageArguments(message: string): Array<ArgumentElement> {
+export type { ArgumentElement };
+
+export function parse(message: string) {
+  return IntlMessageFormatParser.parse(message);
+}
+
+export function getMessageArguments(
+  message: string,
+): { err: ?Error, args: Array<ArgumentElement> } {
   try {
     // ignore if there is parse error
     const ast = IntlMessageFormatParser.parse(message);
-    return getFromMessageFormatPattern(ast);
+    return { err: null, args: getFromMessageFormatPattern(ast) };
   } catch (err) {
-    return [];
+    return { err, args: [] };
   }
 }
 

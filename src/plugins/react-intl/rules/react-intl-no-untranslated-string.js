@@ -1,4 +1,6 @@
 /* @flow */
+import { type EslintRule } from 'eslint';
+
 const ATTRS_TO_CHECK = Object.freeze({
   // @TODO make it editable from outside
   title: true,
@@ -6,7 +8,7 @@ const ATTRS_TO_CHECK = Object.freeze({
   placeholder: true,
 });
 
-module.exports = {
+const Rule: EslintRule = {
   meta: {
     docs: {
       description: 'find empty translation in file',
@@ -81,3 +83,5 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;

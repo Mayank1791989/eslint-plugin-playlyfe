@@ -27,6 +27,7 @@ ruleTester.run('react-intl-strict-message-values', rule, {
         });
       `,
     },
+
     {
       filename: 'test.js',
       code: `
@@ -43,6 +44,18 @@ ruleTester.run('react-intl-strict-message-values', rule, {
         )
       `,
     },
+
+    {
+      filename: 'test.js',
+      code: `
+        <FormattedMessage
+          id="some_id"
+          defaultMessage="{val, select, x { X } y { Y }}"
+          values={{ val }}
+        />
+      `,
+    },
+
     {
       filename: 'test.js',
       code: `
@@ -71,6 +84,18 @@ ruleTester.run('react-intl-strict-message-values', rule, {
         <FormattedMessage
           id="test"
           defaultMessage="Test some {var"
+        />
+      `,
+    },
+
+    // not report for values if invalid message
+    {
+      filename: 'test.js',
+      code: `
+        <FormattedMessage
+          id="test"
+          defaultMessage="Tester some {var} }}}}}"
+          values={{ var: 'tester' }}
         />
       `,
     },
@@ -193,25 +218,6 @@ ruleTester.run('react-intl-strict-message-values', rule, {
     {
       filename: 'test.js',
       code: `
-        intl.formatMessage({
-          id: 'some_id',
-          defaultMessage: "Test message {val}",
-        }, { val, xtest });
-      `,
-      errors: [
-        {
-          severity: 1,
-          message: "Unknow message arg 'xtest' value provided",
-          line: 5,
-          column: 19,
-          endLine: 5,
-          endColumn: 24,
-        },
-      ],
-    },
-    {
-      filename: 'test.js',
-      code: `
         <FormattedMessage
           id='some_id'
           defaultMessage="Test message {val}"
@@ -226,6 +232,25 @@ ruleTester.run('react-intl-strict-message-values', rule, {
           column: 26,
           endLine: 5,
           endColumn: 31,
+        },
+      ],
+    },
+    {
+      filename: 'test.js',
+      code: `
+        intl.formatMessage({
+          id: 'some_id',
+          defaultMessage: "Test message {val}",
+        }, { val, xtest });
+      `,
+      errors: [
+        {
+          severity: 1,
+          message: "Unknow message arg 'xtest' value provided",
+          line: 5,
+          column: 19,
+          endLine: 5,
+          endColumn: 24,
         },
       ],
     },

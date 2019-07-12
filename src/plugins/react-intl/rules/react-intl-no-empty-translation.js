@@ -1,7 +1,9 @@
 /* @flow */
+import * as astUtils from './utils/astUtils';
+import { type EslintRule } from 'eslint';
 import isLocaleFile from './utils/isLocaleFile';
 
-module.exports = {
+const Rule: EslintRule = {
   meta: {},
 
   create(context) {
@@ -11,8 +13,8 @@ module.exports = {
 
     return {
       Property(node) {
-        const { value } = node.value;
-        if (!value.trim()) {
+        const val = astUtils.getStringNodeValue(node.value);
+        if (val && !val.value.trim()) {
           context.report({
             node: node.value,
             message: 'missing translation',
@@ -22,3 +24,5 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;

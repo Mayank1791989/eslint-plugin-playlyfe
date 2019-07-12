@@ -15,6 +15,7 @@ export default {
         'playlyfe/react-intl-no-untranslated-string': 'error',
         'playlyfe/react-intl-strict-message-values': 'error',
         'playlyfe/react-intl-colocate-message-values': 'error',
+        'playlyfe/react-intl-valid-message': 'error',
       },
     },
   },
