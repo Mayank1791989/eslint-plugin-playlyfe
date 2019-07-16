@@ -58,5 +58,28 @@ ruleTester.run('react-intl-valid-message', rule, {
         },
       ],
     },
+
+    // defineMessages
+    {
+      filename: 'test.js',
+      code: `
+        defineMessages({
+          test: {
+            id: "some_id",
+            defaultMessage: "Test message without any argument {var}}",
+          }
+        });
+      `,
+      errors: [
+        {
+          severity: 1,
+          message: `Invalid message: Expected "'", "\\\\#", "\\\\\\\\", "\\\\u", "\\\\{", "\\\\}", "{", [^{}\\\\\\0-\\x1F\\x7F \\t\\n\\r], end of input, or whitespace but "}" found.`,
+          line: 5,
+          column: 29,
+          endLine: 5,
+          endColumn: 71,
+        },
+      ],
+    },
   ],
 });

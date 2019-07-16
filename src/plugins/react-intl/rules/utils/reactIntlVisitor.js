@@ -113,7 +113,7 @@ export default function reactIntlVisitor(
         }
       : {}),
 
-    ...(visitNodes.defineMessages
+    ...(visitNodes.defineMessages || visitNodes.defaultMessageProperty
       ? {
           CallExpression(node) {
             if (
@@ -134,6 +134,24 @@ export default function reactIntlVisitor(
 
             if (visitNodes.defineMessages) {
               visitNodes.defineMessages(valueNode);
+            }
+
+            if (visitNodes.defaultMessageProperty) {
+              const { defaultMessageProperty } = visitNodes;
+
+              valueNode.properties.forEach(property => {
+                if (property.value.type !== 'ObjectExpression') {
+                  return;
+                }
+                const defaultMessageNode = astUtils.findObjectExpressionProperty(
+                  property.value,
+                  'defaultMessage',
+                );
+
+                if (defaultMessageNode) {
+                  defaultMessageProperty(defaultMessageNode);
+                }
+              });
             }
           },
         }
