@@ -1,4 +1,6 @@
 /* @flow */
+import { type EslintRule } from 'eslint';
+
 // Rule to enforce https://github.com/facebook/react/issues/1357
 const CSSProperty = {
   isInList: {
@@ -246,7 +248,7 @@ function toRaw(value: number | string) {
   return `'${value}'`;
 }
 
-module.exports = {
+const Rule: EslintRule = {
   meta: {
     docs: {
       description:
@@ -308,3 +310,5 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;

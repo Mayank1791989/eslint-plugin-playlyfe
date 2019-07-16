@@ -1,5 +1,7 @@
 /* @flow */
-module.exports = {
+import { type EslintRule } from 'eslint';
+
+const Rule: EslintRule = {
   meta: {
     docs: {
       description: 'check dependencies in package.json are exact',
@@ -58,10 +60,10 @@ module.exports = {
               !definedProperties[propertyName] &&
               !ignoreProperties[propertyName]
             ) {
-              context.report(
-                usageNode,
-                `class property '${propertyName}' was used before it was defined.`,
-              );
+              context.report({
+                node: usageNode,
+                message: `class property '${propertyName}' was used before it was defined.`,
+              });
             }
           },
         );
@@ -75,6 +77,8 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;
 
 function findOtherClassPropertyReferences(
   node: ?Object,

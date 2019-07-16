@@ -1,5 +1,7 @@
 /* @flow */
-module.exports = {
+import { type EslintRule } from 'eslint';
+
+const Rule: EslintRule = {
   meta: {
     docs: {
       description: 'Enforce use of Object.freeze for object contants.',
@@ -41,3 +43,5 @@ module.exports = {
     };
   },
 };
+
+module.exports = Rule;
