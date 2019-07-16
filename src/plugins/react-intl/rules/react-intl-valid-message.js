@@ -14,8 +14,8 @@ const Rule: EslintRule = {
   create(context) {
     return reactIntlVisitor({
       defaultMessageJSXAttr(node) {
+        const valueNode = astUtils.getJSXAttributeValue(node);
         try {
-          const valueNode = astUtils.getJSXAttributeValue(node);
           const message = astUtils.getStringNodeValue(valueNode);
           if (!message) {
             return;
@@ -23,7 +23,7 @@ const Rule: EslintRule = {
           icu.parse(message.value);
         } catch (err) {
           context.report({
-            node,
+            node: valueNode,
             message: `Invalid message: ${err.message}`,
           });
         }
@@ -37,7 +37,7 @@ const Rule: EslintRule = {
           icu.parse(message.value);
         } catch (err) {
           context.report({
-            node,
+            node: node.value,
             message: `Invalid message: ${err.message}`,
           });
         }
