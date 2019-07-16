@@ -227,7 +227,7 @@ ruleTester.run('react-intl-strict-message-values', rule, {
       errors: [
         {
           severity: 1,
-          message: "Unknow message arg 'xtest' value provided",
+          message: "Unknown message arg 'xtest' value provided",
           line: 5,
           column: 26,
           endLine: 5,
@@ -246,7 +246,7 @@ ruleTester.run('react-intl-strict-message-values', rule, {
       errors: [
         {
           severity: 1,
-          message: "Unknow message arg 'xtest' value provided",
+          message: "Unknown message arg 'xtest' value provided",
           line: 5,
           column: 19,
           endLine: 5,

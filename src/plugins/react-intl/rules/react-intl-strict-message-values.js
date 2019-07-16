@@ -123,7 +123,7 @@ function reportIfArgsMismatch(context, requiredArgs, valuesNode, offset) {
     extraValues.forEach(node => {
       context.report({
         node,
-        message: `Unknow message arg '${node.name}' value provided`,
+        message: `Unknown message arg '${node.name}' value provided`,
       });
     });
   }
