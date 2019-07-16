@@ -6,4 +6,5 @@ export default {
   'react-intl-no-untranslated-string': require('./react-intl-no-untranslated-string'),
   'react-intl-strict-message-values': require('./react-intl-strict-message-values'),
   'react-intl-colocate-message-values': require('./react-intl-colocate-message-values'),
+  'react-intl-valid-message': require('./react-intl-valid-message'),
 };
