@@ -144,6 +144,11 @@ export default {
 
       'playlyfe/react-jsx-child-element-spacing': 'error',
 
+      'playlyfe/react-jsx-curly-newline': [
+        'error',
+        { multiline: 'consistent', singleline: 'consistent' },
+      ],
+
       'playlyfe/react-jsx-curly-spacing': [
         'error',
         'never',

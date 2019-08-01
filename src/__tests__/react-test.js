@@ -372,6 +372,37 @@ configTester.run('playlyfe/react-jsx-closing-tag-location', 'error', {
   ],
 });
 
+configTester.run('playlyfe/react-jsx-curly-newline', 'error', {
+  valid: [
+    {
+      code: `
+        <div>
+          { foo }
+        </div>
+      `,
+    },
+    {
+      code: `
+        <div>
+          {
+            foo
+          }
+        </div>
+      `,
+    },
+  ],
+  invalid: [
+    {
+      code: `
+        <div>
+          { foo
+          }
+        </div>
+      `,
+    },
+  ],
+});
+
 configTester.run('playlyfe/react-jsx-curly-spacing', 'error', {
   valid: [
     { code: '<div value={5} />' },
