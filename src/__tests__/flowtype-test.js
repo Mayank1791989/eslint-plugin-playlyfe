@@ -103,9 +103,23 @@ configTester.run('playlyfe/flowtype-object-type-delimiter', 'error', {
 
 configTester.run('playlyfe/flowtype-require-compound-type-alias', 'off');
 configTester.run('playlyfe/flowtype-require-exact-type', 'off');
+configTester.run('playlyfe/flowtype-require-inexact-type', 'off');
 configTester.run('playlyfe/flowtype-require-parameter-type', 'off');
 configTester.run('playlyfe/flowtype-require-return-type', 'off');
 configTester.run('playlyfe/flowtype-require-types-at-top', 'off');
+
+configTester.run('playlyfe/flowtype-arrow-parens', 'error', {
+  valid: [
+    {
+      code: `const fn = (a) => a;`,
+    },
+  ],
+  invalid: [
+    {
+      code: `const fn = a => a;`,
+    },
+  ],
+});
 
 configTester.run('playlyfe/flowtype-require-valid-file-annotation', 'error', {
   valid: [

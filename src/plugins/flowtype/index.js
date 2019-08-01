@@ -49,6 +49,8 @@ export default {
 
         // can cause issues
         'playlyfe/flowtype-require-exact-type': 'off',
+        'playlyfe/flowtype-require-inexact-type': 'off',
+        'playlyfe/flowtype-arrow-parens': ['error', 'always'],
 
         'playlyfe/flowtype-require-parameter-type': 'off',
         'playlyfe/flowtype-require-return-type': 'off',
