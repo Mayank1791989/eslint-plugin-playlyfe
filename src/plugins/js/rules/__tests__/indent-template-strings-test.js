@@ -111,5 +111,27 @@ ruleTester.run('indent-template-strings', rule, {
 
       ...baseConfig,
     },
+
+    {
+      code: `
+        const tester = "hello";
+        const a = someWrongIndentedTemplateString(\`
+            not correctly indented line with closing tick\`);
+      `,
+
+      output: `
+        const tester = "hello";
+        const a = someWrongIndentedTemplateString(\`
+          not correctly indented line with closing tick\`);
+      `,
+
+      errors: [
+        {
+          message: 'Not correctly indented',
+        },
+      ],
+
+      ...baseConfig,
+    },
   ],
 });

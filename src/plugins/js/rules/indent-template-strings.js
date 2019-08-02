@@ -61,10 +61,16 @@ function redentText(
   const content = text.substr(1, text.length - 2);
   const indentedContent = redent(content, indentation.content);
   const lines = indentedContent.split('\n');
+
+  // add opening tick
   lines[0] = `\`${lines[0]}`;
-  if (isEmptyLine(lines[lines.length - 1])) {
-    lines[lines.length - 1] = redent('`', indentation.tick, { indent: ' ' });
-  }
+
+  // add closing tick
+  const lastLine = lines[lines.length - 1];
+  lines[lines.length - 1] = isEmptyLine(lastLine)
+    ? redent('`', indentation.tick)
+    : `${lastLine}\``;
+
   return lines.join('\n');
 }
 
