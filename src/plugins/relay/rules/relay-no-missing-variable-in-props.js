@@ -1,6 +1,5 @@
 /* @flow */
 import Components from 'eslint-plugin-react/lib/util/Components';
-import Traverser from 'eslint/lib/util/traverser';
 import invariant from 'invariant';
 
 module.exports = {
@@ -38,47 +37,6 @@ module.exports = {
       return true;
     }
 
-    // relay createContainer callExpression node
-    // createContainer(component, spec);
-    function getComponentWiseVariablesMapping(relayCreateContainerNode) {
-      invariant(
-        relayCreateContainerNode.type === 'CallExpression',
-        'node should be of type CallExpression',
-      );
-
-      const traverser = new Traverser();
-      const variablesMapping = {};
-
-      // find all Relay.QL fragments and find variables mapping
-      traverser.traverse(relayCreateContainerNode, {
-        enter(node) {
-          if (!isRelayQL(node)) {
-            return;
-          }
-          const relayQLTemplateStringNode = node;
-          relayQLTemplateStringNode.quasi.expressions.forEach(expression => {
-            if (expression.type !== 'CallExpression') {
-              return;
-            } // there can be inline fragments
-            // if not variables passed
-            if (expression.arguments.length !== 2) {
-              return;
-            }
-
-            // jsxElementName.getFragment('xyz', { var1, var2, var3 })
-            // return jsxElementName
-            const jsxElementName = sourceCode.getText(expression.callee.object);
-            const variables = expression.arguments[1].properties.map(
-              p => p.key.name,
-            );
-            variablesMapping[jsxElementName] = variables; // eslint-disable-line no-param-reassign
-          });
-        },
-      });
-
-      return variablesMapping;
-    }
-
     // node @TODO extends above React Component.detect util
     // to add relay related methods
     function isRelayCreateContainer(node) {
@@ -114,6 +72,7 @@ module.exports = {
       return name;
     }
 
+    const activeRelayComponents = [];
     const relayComponentsVariablesMapping = {};
 
     //--------------------------------------------------------------------------
@@ -128,11 +87,55 @@ module.exports = {
         if (!isRelayCreateContainer(node)) {
           return;
         }
-
-        const mapping = getComponentWiseVariablesMapping(node);
         const componentName = sourceCode.getText(node.arguments[0]);
+        relayComponentsVariablesMapping[componentName] = {};
+        activeRelayComponents.push(componentName);
+      },
 
-        relayComponentsVariablesMapping[componentName] = mapping;
+      TaggedTemplateExpression(node) {
+        if (!isRelayQL(node)) {
+          return;
+        }
+
+        const activeComponentName =
+          activeRelayComponents[activeRelayComponents.length - 1];
+
+        if (!activeComponentName) {
+          return;
+        }
+
+        const variablesMapping =
+          relayComponentsVariablesMapping[activeComponentName];
+
+        node.quasi.expressions.forEach(expression => {
+          if (expression.type !== 'CallExpression') {
+            return;
+          } // there can be inline fragments
+          // if not variables passed
+          if (expression.arguments.length !== 2) {
+            return;
+          }
+
+          // jsxElementName.getFragment('xyz', { var1, var2, var3 })
+          // return jsxElementName
+          const jsxElementName = sourceCode.getText(expression.callee.object);
+          const variables = expression.arguments[1].properties.map(
+            p => p.key.name,
+          );
+          variablesMapping[jsxElementName] = variables; // eslint-disable-line no-param-reassign
+        });
+      },
+
+      'CallExpression:exit': function CallExpressionExit(node) {
+        if (!isRelayCreateContainer(node)) {
+          return;
+        }
+
+        const componentName = sourceCode.getText(node.arguments[0]);
+        const name = activeRelayComponents.pop();
+        if (name !== componentName) {
+          throw new Error('Something wrong');
+        }
       },
 
       'Program:exit': function ProgramExit() {
