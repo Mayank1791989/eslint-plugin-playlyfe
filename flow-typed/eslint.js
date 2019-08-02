@@ -1,5 +1,33 @@
 /* @flow */
 declare module 'eslint' {
+  declare type Config = $FixMe;
+
+  declare export class CLIEngine {
+    constructor(options: $FixMe): this;
+    getConfigForFile(filepath: string): Config;
+    getRules(): Map<string /* name */, EslintRule>;
+    executeOnText(code: string, filename?: ?string): $FixMe;
+  }
+
+  declare export class RuleTester {
+    constructor(options: $FixMe): this;
+    static describe: $FixMe;
+    static it: $FixMe;
+    run(
+      name: string,
+      rule: EslintRule,
+      testConfig: {
+        valid: $ReadOnlyArray<{ code: string, ... }>,
+        invalid: $ReadOnlyArray<{
+          code: string,
+          errors: Array<$FixMe>,
+          output?: string,
+          ...
+        }>,
+      },
+    ): void;
+  }
+
   declare export type EslintRuleVisitor = {
     JSXOpeningElement?: (node: JSXOpeningElementNode) => void,
     JSXAttribute?: (node: JSXAttributeNode) => void,

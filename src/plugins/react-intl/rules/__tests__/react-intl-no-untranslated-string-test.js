@@ -1,10 +1,10 @@
 /* @flow */
 import rule from '../react-intl-no-untranslated-string';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 const error = (others = {}) => ({
@@ -40,14 +40,12 @@ ruleTester.run('react-intl-no-untranslated-string', rule, {
     {
       code: '<div title={"string"} />',
       errors: [error({ line: 1, column: 13 })],
-      parser: 'babel-eslint',
     },
 
     {
       // don't crash for non-string attributes
       code: '<div title={false} />',
       errors: [error({ line: 1, column: 13 })],
-      parser: 'babel-eslint',
     },
 
     {

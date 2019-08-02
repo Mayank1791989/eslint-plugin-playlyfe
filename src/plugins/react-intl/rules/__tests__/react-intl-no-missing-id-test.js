@@ -1,10 +1,10 @@
 /* @flow */
 import rule from '../react-intl-no-missing-id';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 const defaultParams = {
@@ -104,7 +104,6 @@ ruleTester.run('react-intl-no-missing-id', rule, {
           message: 'Missing reactIntlFilePath option.',
         },
       ],
-      parser: 'babel-eslint',
     },
 
     // throw error if invalid file path
@@ -120,7 +119,6 @@ ruleTester.run('react-intl-no-missing-id', rule, {
           column: 1,
         },
       ],
-      parser: 'babel-eslint',
       options: [
         {
           reactIntlFilePath: 'some_missing_file_path.json',

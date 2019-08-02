@@ -1,14 +1,13 @@
 /* @flow */
 import rule from '../use-exact-dependency';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 const baseConfig = {
-  parser: 'babel-eslint',
   filename: 'package.json',
 };
 

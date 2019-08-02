@@ -1,9 +1,9 @@
 /* @flow */
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 import rule from '../react-jsx-pascal-case-patched';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 ruleTester.run('playlyfe/react-jsx-pascal-case', rule, {

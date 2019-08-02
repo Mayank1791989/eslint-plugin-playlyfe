@@ -1,16 +1,17 @@
 /* @flow */
-import { createRuleFinder } from './test-utils/eslint-utils';
+import ConfigTester from 'test-utils/ConfigTester';
 import path from 'path';
 
 test('all rules used', () => {
-  const ruleFinder = createRuleFinder(
-    path.resolve(__dirname, './all-rules-used-eslintrc.js'),
-  );
-  const ignoreRuleList = ['playlyfe/prettier'];
+  const configTester = new ConfigTester({
+    configFile: path.resolve(__dirname, './all-rules-used-eslintrc.js'),
+  });
 
-  const unusedRules = ruleFinder
-    .getUnusedRules()
-    .filter(rule => !ignoreRuleList.includes(rule));
+  const ignoreRules = { 'playlyfe/prettier': true };
+
+  const unusedRules = configTester
+    .getMissingConfigRules()
+    .filter(rule => !ignoreRules[rule]);
 
   expect(unusedRules).toEqual([]);
 });

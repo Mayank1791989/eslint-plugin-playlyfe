@@ -1,12 +1,10 @@
 /* @flow */
-/* global JestExpectType, JestExpectTypeExtended */
 import dedent from 'dedent-js';
 import chalk from 'chalk';
-import { CLIEngine } from 'eslint';
+import { CLIEngine, type EslintRule } from 'eslint';
 import {
   createLinter,
   createCLIEngine,
-  createRuleFinder,
   getRuleSeverity,
   getSuggestionsForMissingRule,
   type Severity,
@@ -19,19 +17,19 @@ type TestConfig = $Exact<{
 
 export default class ConfigTester {
   configFile: string;
-
-  definedRules: { [ruleId: string]: any };
-
   lint: Function;
-
   cliEngine: CLIEngine;
+
+  allRules: Map<string, EslintRule>;
+  rulesConfig: {};
 
   constructor({ configFile }: { configFile: string }) {
     this.configFile = configFile;
-    const ruleFinder = createRuleFinder(configFile);
-    this.definedRules = ruleFinder.getCurrentRulesDetailed();
     this.lint = createLinter(configFile);
     this.cliEngine = createCLIEngine(configFile);
+
+    this.allRules = this.cliEngine.getRules();
+    this.rulesConfig = this.cliEngine.getConfigForFile(configFile).rules;
   }
 
   parse(code: string) {
@@ -44,6 +42,16 @@ export default class ConfigTester {
         throw new Error(message.message);
       }
     });
+  }
+
+  getMissingConfigRules(): Array<string> {
+    const missingConfigRules = [];
+    this.allRules.forEach((v, name) => {
+      if (!this.rulesConfig[name]) {
+        missingConfigRules.push(name);
+      }
+    });
+    return missingConfigRules;
   }
 
   run(ruleId: string, severity: Severity, testConfig?: TestConfig) {
@@ -71,7 +79,7 @@ export default class ConfigTester {
     severity: string,
     testConfig?: TestConfig,
   ) => {
-    const { definedRules, lint } = this;
+    const { rulesConfig, lint } = this;
 
     // NOTE: inline declaration to tell flow about added custom matchers
     declare type JestExpectTypeExtended = JestExpectType & {
@@ -108,14 +116,14 @@ export default class ConfigTester {
     // testConfig
     const { valid = [], invalid = [] } = testConfig || {};
 
-    if (!definedRules[ruleId]) {
+    if (!rulesConfig[ruleId]) {
       throw new Error(
         [
           `ruleId '${ruleId}' passed in test not found in config`,
           '\n========= Available ===========\n',
           `\t${getSuggestionsForMissingRule(
             ruleId,
-            Object.keys(definedRules),
+            Object.keys(rulesConfig),
           ).join('\n\t')}.`,
           '\n===============================\n',
         ].join('\n'),
@@ -123,8 +131,8 @@ export default class ConfigTester {
     }
 
     it('severity level is correct', () => {
-      const ruleDefinition = definedRules[ruleId];
-      const definedSeverity = getRuleSeverity(ruleDefinition);
+      const ruleConfig = rulesConfig[ruleId];
+      const definedSeverity = getRuleSeverity(ruleConfig);
       expect(severity).toEqual(definedSeverity);
     });
 

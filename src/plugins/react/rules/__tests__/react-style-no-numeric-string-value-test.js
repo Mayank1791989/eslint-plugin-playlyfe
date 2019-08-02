@@ -1,9 +1,9 @@
 /* @flow */
 import rule, { errorMessage } from '../react-style-no-numeric-string-value';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 ruleTester.run('react-style-no-numeric-string-value', rule, {

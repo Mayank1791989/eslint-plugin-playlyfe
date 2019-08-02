@@ -1,14 +1,13 @@
 /* @flow */
 import rule from '../class-property-no-use-before-define';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 const baseConfig = {
-  parser: 'babel-eslint',
   filename: 'test.js',
 };
 

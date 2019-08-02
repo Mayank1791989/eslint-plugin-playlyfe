@@ -1,9 +1,9 @@
 /* @flow */
 import rule from '../react-intl-strict-message-values';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester({
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 });
 
 ruleTester.run('react-intl-strict-message-values', rule, {

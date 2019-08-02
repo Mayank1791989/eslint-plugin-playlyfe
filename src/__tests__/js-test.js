@@ -1,5 +1,5 @@
 /* @flow */
-import { ConfigTester } from './test-utils';
+import ConfigTester from 'test-utils/ConfigTester';
 import dedent from 'dedent-js';
 import path from 'path';
 

@@ -89,6 +89,7 @@ module.exports = {
 
     // this option sets a specific tab width for your code
     // http://eslint.org/docs/rules/indent
+    'indent-legacy': 'off',
     indent: [
       'error',
       2,
@@ -455,5 +456,7 @@ module.exports = {
 
     // require regex literals to be wrapped in parentheses
     'wrap-regex': 'off',
+
+    'playlyfe/babel-flow-object-type': 'off',
   },
 };

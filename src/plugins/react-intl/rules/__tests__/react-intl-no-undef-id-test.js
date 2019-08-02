@@ -1,12 +1,13 @@
 /* @flow */
 import rule from '../react-intl-no-undef-id';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+  parser: require.resolve('babel-eslint'),
+});
 
 const defaultOptions = {
-  parser: 'babel-eslint',
   options: [
     {
       reactIntlFilePath: require.resolve('./data/react-intl.json'),
@@ -82,7 +83,6 @@ ruleTester.run('react-intl-no-undef-id', rule, {
           message: 'Missing reactIntlFilePath option.',
         },
       ],
-      parser: 'babel-eslint',
     },
 
     // throw error if invalid file path
@@ -98,7 +98,6 @@ ruleTester.run('react-intl-no-undef-id', rule, {
           column: 1,
         },
       ],
-      parser: 'babel-eslint',
       options: [
         {
           reactIntlFilePath: 'some_missing_file_path.json',

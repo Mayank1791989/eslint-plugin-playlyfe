@@ -1,12 +1,12 @@
 /* @flow */
 import rule from '../react-intl-no-empty-translation';
 import dedent from 'dedent-js';
-import RuleTester from '../../../../utils/RuleTester';
+import RuleTester from 'test-utils/RuleTester';
 
 const ruleTester = new RuleTester();
 
 const defaultOptions = {
-  parser: 'babel-eslint',
+  parser: require.resolve('babel-eslint'),
 };
 
 ruleTester.run('react-intl-no-empty-translation', rule, {
