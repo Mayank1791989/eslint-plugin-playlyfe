@@ -26,6 +26,7 @@ export default {
     rules: {
       'playlyfe/freeze-const-object': 'error',
       'playlyfe/class-property-no-use-before-define': 'error',
+      'playlyfe/indent-template-strings': 'error',
 
       // buggy rules
       'object-curly-newline': 'off',

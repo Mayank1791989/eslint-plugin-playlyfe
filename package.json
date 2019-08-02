@@ -41,7 +41,8 @@
     "eslint-plugin-react": "7.14.3",
     "intl-messageformat-parser": "1.8.1",
     "invariant": "2.2.4",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "redent": "3.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.5.5",

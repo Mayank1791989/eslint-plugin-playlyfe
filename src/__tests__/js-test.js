@@ -1416,6 +1416,7 @@ configTester.run('sort-imports', 'off');
 
 configTester.run('playlyfe/freeze-const-object', 'error');
 configTester.run('playlyfe/class-property-no-use-before-define', 'error');
+configTester.run('playlyfe/indent-template-strings', 'error');
 
 test('should able to parse flow function with TypeArguments', () => {
   expect(() => {
