@@ -1,4 +1,5 @@
-node_modules/
+# only ignore top-level node_modules dir
+/node_modules/
 lib/
 .nyc_output
 coverage
