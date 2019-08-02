@@ -538,12 +538,12 @@ configTester.run('playlyfe/react-jsx-key', 'error', {
   invalid: [
     {
       code: `
-      <div>
-        {list.map((item) => (
-          <ListItem item={item} />
-        ))}
-      </div>
-    `,
+        <div>
+          {list.map((item) => (
+            <ListItem item={item} />
+          ))}
+        </div>
+      `,
     },
   ],
 });
@@ -637,17 +637,17 @@ configTester.run('playlyfe/react-jsx-no-undef', 'error', {
   valid: [
     {
       code: `
-      import CustomButton from './ui';
+        import CustomButton from './ui';
 
-      <CustomButton name="react" name="styles" />
-    `,
+        <CustomButton name="react" name="styles" />
+      `,
     },
   ],
   invalid: [
     {
       code: `
-      <CustomButton name="react" name="styles" />
-    `,
+        <CustomButton name="react" name="styles" />
+      `,
     },
   ],
 });

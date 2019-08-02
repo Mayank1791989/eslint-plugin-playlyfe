@@ -481,10 +481,10 @@ configTester.run('no-delete-var', 'error', {
   valid: [
     {
       code: `
-      // allow deleting object properties
-      const obj = { a: 10 };
-      delete obj.a;
-    `,
+        // allow deleting object properties
+        const obj = { a: 10 };
+        delete obj.a;
+      `,
     },
   ],
   // already not allowed by babel-parser
