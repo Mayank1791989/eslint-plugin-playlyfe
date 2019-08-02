@@ -19,7 +19,7 @@ module.exports = {
   postprocess(messages: Array<any>) {
     const [errors] = messages;
     // filter out errors not from json rules
-    const validErrors = errors.filter(error => isJsonRule(error.ruleId));
+    const validErrors = errors.filter((error) => isJsonRule(error.ruleId));
     return validErrors;
   },
 

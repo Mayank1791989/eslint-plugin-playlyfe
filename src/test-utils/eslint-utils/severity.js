@@ -37,7 +37,7 @@ export function getSuggestionsForMissingRule(
   allRules: Array<string>,
 ): Array<string> {
   return allRules
-    .map(item => ({ dist: leven(missingRuleId, item), item }))
+    .map((item) => ({ dist: leven(missingRuleId, item), item }))
     .sort((a, b) => a.dist - b.dist)
     .splice(0, 10) // return top 10 result
     .map(({ item }) => item);

@@ -111,7 +111,7 @@ function reportIfArgsMismatch(context, requiredArgs, valuesNode, offset) {
   const { missingArgs, extraValues } = diffArgs(requiredArgs, passedArgs);
 
   if (missingArgs.length > 0) {
-    const argsNames = missingArgs.map(arg => `'${arg.id}'`);
+    const argsNames = missingArgs.map((arg) => `'${arg.id}'`);
     context.report({
       node: valuesNode,
       message: `Missing values for message args [${argsNames.join(',')}]`,
@@ -120,7 +120,7 @@ function reportIfArgsMismatch(context, requiredArgs, valuesNode, offset) {
   }
 
   if (extraValues.length > 0) {
-    extraValues.forEach(node => {
+    extraValues.forEach((node) => {
       context.report({
         node,
         message: `Unknown message arg '${node.name}' value provided`,
@@ -130,7 +130,7 @@ function reportIfArgsMismatch(context, requiredArgs, valuesNode, offset) {
 }
 
 function highlightArgs(context, args, offset) {
-  args.forEach(arg => {
+  args.forEach((arg) => {
     context.report({
       message: `Message arg '${arg.id}' value not provided`,
       loc: genErrorLoc(arg.location, offset),

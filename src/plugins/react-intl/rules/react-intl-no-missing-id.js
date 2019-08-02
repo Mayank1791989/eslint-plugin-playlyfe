@@ -60,7 +60,7 @@ const Rule: EslintRule = {
 
     return {
       ObjectExpression(node) {
-        node.properties.forEach(propertyNode => {
+        node.properties.forEach((propertyNode) => {
           const keyText = getKeyText(propertyNode.key);
           if (keyText) {
             presentIds[keyText] = true;
@@ -68,7 +68,7 @@ const Rule: EslintRule = {
         });
 
         const missingIds = Object.keys(reactIntlJson).filter(
-          id => !presentIds[id],
+          (id) => !presentIds[id],
         );
 
         if (missingIds.length > 0) {
@@ -79,7 +79,7 @@ const Rule: EslintRule = {
               const n = '\n'; // newLine
               const t = '  '; // tabSpace
               const missingIdsString = missingIds
-                .map(id => `${t}'${id}': ' ',`)
+                .map((id) => `${t}'${id}': ' ',`)
                 .join(n);
 
               const startBracketToken = sourceCode.getTokenByRangeStart(

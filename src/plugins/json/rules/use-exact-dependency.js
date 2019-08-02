@@ -29,7 +29,7 @@ module.exports = {
         }
 
         const dependencies = node.value.properties;
-        dependencies.forEach(depsNode => {
+        dependencies.forEach((depsNode) => {
           if (!isExact(depsNode.value.value)) {
             context.report({
               node: depsNode.value,

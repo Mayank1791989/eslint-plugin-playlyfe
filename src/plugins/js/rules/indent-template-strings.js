@@ -134,7 +134,7 @@ function getContentIndentation(node, sourceCode) {
 // Will return indentation of first non-empty line
 function findIndentation(str: string): number {
   const lines = str.split('\n');
-  const nonEmptyLine = lines.find(line => !isEmptyLine(line));
+  const nonEmptyLine = lines.find((line) => !isEmptyLine(line));
   if (!nonEmptyLine) {
     return 0;
   }

@@ -139,7 +139,7 @@ export default function reactIntlVisitor(
             if (visitNodes.defaultMessageProperty) {
               const { defaultMessageProperty } = visitNodes;
 
-              valueNode.properties.forEach(property => {
+              valueNode.properties.forEach((property) => {
                 if (property.value.type !== 'ObjectExpression') {
                   return;
                 }

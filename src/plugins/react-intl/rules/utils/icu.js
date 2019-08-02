@@ -23,13 +23,13 @@ export function getMessageArguments(
 
 function getFromMessageFormatPattern(node) {
   const args = [];
-  node.elements.forEach(elem => {
+  node.elements.forEach((elem) => {
     if (elem.type === 'argumentElement') {
       args.push(elem);
       const { format } = elem;
       if (format && format.options) {
         const { options } = format;
-        options.forEach(option => {
+        options.forEach((option) => {
           args.push(...getFromMessageFormatPattern(option.value));
         });
       }

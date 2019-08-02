@@ -107,7 +107,7 @@ module.exports = {
         const variablesMapping =
           relayComponentsVariablesMapping[activeComponentName];
 
-        node.quasi.expressions.forEach(expression => {
+        node.quasi.expressions.forEach((expression) => {
           if (expression.type !== 'CallExpression') {
             return;
           } // there can be inline fragments
@@ -120,7 +120,7 @@ module.exports = {
           // return jsxElementName
           const jsxElementName = sourceCode.getText(expression.callee.object);
           const variables = expression.arguments[1].properties.map(
-            p => p.key.name,
+            (p) => p.key.name,
           );
           variablesMapping[jsxElementName] = variables; // eslint-disable-line no-param-reassign
         });
@@ -146,7 +146,7 @@ module.exports = {
           return;
         }
 
-        Object.keys(list).forEach(key => {
+        Object.keys(list).forEach((key) => {
           const component = list[key];
           const jsxElements = component.jsxElements || [];
           const componentName = getComponentName(component.node);
@@ -172,7 +172,7 @@ module.exports = {
             }, {});
 
             const missingVariableProps = variables.filter(
-              variable => !attrsMap[variable],
+              (variable) => !attrsMap[variable],
             );
             if (!(missingVariableProps && missingVariableProps.length === 0)) {
               context.report({

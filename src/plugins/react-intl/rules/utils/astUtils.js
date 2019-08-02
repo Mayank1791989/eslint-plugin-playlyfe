@@ -14,7 +14,7 @@ export function findObjectExpressionProperty(
   key: string,
 ) {
   return node.properties.find(
-    property =>
+    (property) =>
       property.type === 'Property' &&
       property.key.type === 'Identifier' &&
       property.key.name === key,
@@ -42,7 +42,7 @@ export function getTemplateLiteralStringValue(node: TemplateLiteralNode) {
 
 export function findJSXAttribute(node: JSXOpeningElementNode, name: string) {
   return node.attributes.find(
-    attr => attr.type === 'JSXAttribute' && attr.name.name === name,
+    (attr) => attr.type === 'JSXAttribute' && attr.name.name === name,
   );
 }
 

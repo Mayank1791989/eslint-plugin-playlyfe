@@ -15,7 +15,7 @@ const Rule: EslintRule = {
   create(context) {
     return reactIntlVisitor({
       defineMessages(node) {
-        node.properties.forEach(property => {
+        node.properties.forEach((property) => {
           if (property.value.type !== 'ObjectExpression') {
             return;
           }

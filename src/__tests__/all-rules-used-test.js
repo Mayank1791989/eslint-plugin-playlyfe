@@ -11,7 +11,7 @@ test('all rules used', () => {
 
   const unusedRules = configTester
     .getMissingConfigRules()
-    .filter(rule => !ignoreRules[rule]);
+    .filter((rule) => !ignoreRules[rule]);
 
   expect(unusedRules).toEqual([]);
 });

@@ -37,21 +37,21 @@ const Rule: EslintRule = {
       return { line, column };
     }
 
-    const report = node => {
+    const report = (node) => {
       context.report({
         loc: findCorrectLocation(node),
         message: 'no-untranslated-string',
       });
     };
 
-    const isNotWhiteSpaceLiteral = node =>
+    const isNotWhiteSpaceLiteral = (node) =>
       // eslint-disable-line arrow-body-style
       // <div> <i /> </div>
       // div has 3 children
       // ' ', <i />, ' '   1 & 2  are literal with value whitespace
       !/^\s+$/.test(node.value);
 
-    const reportIfString = node => {
+    const reportIfString = (node) => {
       if (node.type === 'Literal' && isNotWhiteSpaceLiteral(node)) {
         report(node);
       }
@@ -68,7 +68,7 @@ const Rule: EslintRule = {
     return {
       JSXElement(node) {
         const childrenNodes = node.children;
-        childrenNodes.forEach(childNode => {
+        childrenNodes.forEach((childNode) => {
           reportIfString(childNode);
         });
       },

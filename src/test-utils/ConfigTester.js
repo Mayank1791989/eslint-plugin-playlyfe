@@ -36,7 +36,7 @@ export default class ConfigTester {
     const { results } = this.cliEngine.executeOnText(code);
     // eslint-disable-next-line prefer-destructuring
     const { messages } = results[0];
-    messages.forEach(message => {
+    messages.forEach((message) => {
       // NOTE: fatal means there is some parseError
       if (message.fatal) {
         throw new Error(message.message);

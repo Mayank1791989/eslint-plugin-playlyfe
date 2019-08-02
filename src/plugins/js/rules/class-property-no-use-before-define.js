@@ -105,7 +105,7 @@ function findOtherClassPropertyReferences(
       // case: this.property()
       findOtherClassPropertyReferences(node.callee, clb);
       // case: xyz(this.property)
-      node.arguments.forEach(argNode => {
+      node.arguments.forEach((argNode) => {
         findOtherClassPropertyReferences(argNode, clb);
       });
       break;
@@ -113,7 +113,7 @@ function findOtherClassPropertyReferences(
     // Can be present in both key and value
     case 'ObjectExpression': {
       // case: in key { [this.property]: any }
-      node.properties.forEach(propertyNode => {
+      node.properties.forEach((propertyNode) => {
         findOtherClassPropertyReferences(propertyNode.key, clb);
         findOtherClassPropertyReferences(propertyNode.value, clb);
       });
@@ -121,7 +121,7 @@ function findOtherClassPropertyReferences(
     }
     // [this.property]
     case 'ArrayExpression': {
-      node.elements.forEach(elemNode => {
+      node.elements.forEach((elemNode) => {
         findOtherClassPropertyReferences(elemNode, clb);
       });
       break;
